@@ -1,0 +1,188 @@
+
+[scraper] Zone: Paris (dept 75)
+[scraper]   \u2192 restaurant...
+[2026-05-02 12:35:36] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=restaurant&departement=75&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • GIE GAM RESTAURANT — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • LES RESTAURANTS DU COEUR — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • TORTILLA RESTAURANTS SAS — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • DK RESTAURANTS — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • BALM RESTAURANT — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BIG MAMMA RESTAURANTS FRANCE — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • SMR RESTAURANT (LA GOYAVE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • NMP RESTAURANTS (EPHEMERE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • RESTAURANT CHARLY — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • SOCIETE FRANCAISE D'EXPLOITATION DE RESTAURANT (SO.FE.REST.) (SOFEREST) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • O'TACOS RESTAURANT I — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • LES RESTAURANTS BISTROT SOLEIL — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • RESTAURANT TERANGA — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • DEUX RESTAURANT — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • TEAM RESTAURANT — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • RESTAURANT ALENCON — effectif: 12, tel: non, site: non \u2192 65/100
+[scraper]   • RESTAURANT ARTIGIANALE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • VERT RESTAURANT — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LE 360 RESTAURANT — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • JKR RESTAURANT (JKR RESTAURANT) — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   \u2192 boulangerie...
+[2026-05-02 12:35:37] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=boulangerie&departement=75&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • BOULANGERIES PAUL — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • BOULANGERIE NEUHAUSER — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   • LA BOULANGERIE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE DU NIL — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • BOULANGERIE LORETTE (LORETTE BAC) — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • BOULANGERIE CHAMBELLAND — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • BOULANGERIE TARDIF — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • LA BOULANGERIE PLEYEL — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE CHARCOT — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • BOULANGERIE DES DAMES — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE DE LA ROTONDE — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • BOULANGERIE MOZART (BOULANGERIE MOZART) — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • BOULANGERIE ALEXINE — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • CINNAMON BOULANGERIE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LA BOULANGERIE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LA BOULANGERIE — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • LA BOULANGERIE — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • BOULANGERIE C&M — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • DES BOULANGERIES — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE HAUSSMANN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 artisan...
+[2026-05-02 12:35:39] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=artisan&departement=75&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • ARTISAN ROUSSEAU — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ARTISANS DU PORTAIL (ARTISAN DU COIN) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISANS MULTISERVICES — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISAN BERTRAND — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISAN ROBERT (ARTISAN ROBERT) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • FRANCE ARTISAN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISAN BRUNO — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • ARTISANS DEPANNAGE SERVICE (ADS) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISANS MULTISERVICES DES YVELINES (ETABLISSEMENTS FONTAINE PERE ET FILS) — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • AU CARREFOUR DES ARTISANS (A.C.A) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • HELP ARTISAN (HELP ISOLATION) — effectif: 00, tel: non, site: non \u2192 35/100
+[scraper]   • L' ARTISAN PARFUMEUR S.A.R.L. — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISAN SOLUTION RAPIDE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ARTISANS RECUPERATEURS (ARTIREC) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • ARTISANS DE PROXIMITE (ETS FOUCAULT) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES BONS ARTISANS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ARTISANS DU TEMPS — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • LES ARTISANS DE SEINE ET MARNE (ETABLISSEMENT PICARD ET FILS) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISANS BERNARD & SILVESTRE (ARTISANS BERNARD ET SYLVESTRE) — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • ABL ARTISAN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 coiffeur...
+[2026-05-02 12:35:40] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=coiffeur&departement=75&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • MEILLEUR COIFFEUR (MEILLEUR COIFFEUR) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • M T COIFFEUR — effectif: 03, tel: non, site: non \u2192 60/100
+[scraper]   • 1982 COIFFEUR — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • BELGRAND COIFFEUR — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • CF COIFFEURS — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • LES COIFFEURS DU FAUBOURG — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • COIFFEUR 1919 — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • COIFFEUR DU MONDE — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • SUPER COIFFEUR — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • LA CABANES ET LES COIFFEURS (LA CABANE ET LES COIFFEURS) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • AXEL COIFFEUR (BL COIFFURES) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • COIFFEUR PARISIEN — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • PAPY COIFFEUR — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BEBAWI COIFFEUR — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • SAI COIFFEUR (SAI COIFFEUR) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • COIFFEUR STREET — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • TAREK COIFFEUR (TAREK COIFFEUR) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • COIFFEUR K.R. — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • ABISHA COIFFEUR — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • PRINCE COIFFEUR — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   \u2192 plombier...
+[2026-05-02 12:35:41] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=plombier&departement=75&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • ALLO PLOMBIER — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES BONS PLOMBIERS (LES BONS PLOMBIERS) — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • PLOMBIER REGIS (PLOMBIER REGIS) — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • ASR PLOMBIER (ASR PLOMBIER PARIS) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CHER PLOMBIER PAS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • TARIF PLOMBIER — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CHAUFFAGISTE PLOMBIER — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • PLOMBIER SOS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • C LE PLOMBIER — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • MOI PLOMBIER AUTOUR DE MOI — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • PROXIMITE PLOMBIER A — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • PARIS PLOMBIER URGENCE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BASICO PLOMBIER CHAUFFAGISTE (BPC) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • PLOMBIER - VOISINAGE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • GREEN PLOMBIER — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • CYCL'EAU PLOMBIER (CYCLE DEPANNAGE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • FORMA-PLOMBIER — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • PLOMBIER AUTOUR DE MOI — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • L'AMI PLOMBIER — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • SDN PLOMBIER — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 electricien...
+[2026-05-02 12:35:43] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=electricien&departement=75&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • ELECTRICIENS SANS FRONTIERES L'ENERGIE DU DEVELOPPEMENT — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ELECTRICIENS DE PARIS (EDP) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ELECTRICIENS DE PONTOISE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LA MAISON DES ELECTRICIENS (LMDE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ELECTRICIENS DU PERCHE — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • ADRIEN ELECTRICIEN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LE TRAIT D UNION ELECTRICIENS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ELECTRICIENS ASSOCIES DE FRANCE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISAN ELECTRICIEN FOLLIOT — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • MON ELECTRICIEN A VELO (MEAV) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ELECTRICIEN A VOTRE SERVICE — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • SEE ELECTRICIEN ELECTRONICIEN (SEE) — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • FEDERATION FRANCAISE DES INTEGRATEURS ELECTRICIENS (F.F.I.E.) — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • A VOTRE SERVICE PLOMBIER CHAUFFAGISTE SERRURIER VITRIER ELECTRICIEN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CLUBS OMNISPORTS DES ELECTRICIENS ET GAZIERS DE FRANCE (C.O.E.G.F) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CLUBS OMNISPORTS DES ELECTRICIENS ET GAZIERS DE FRANCE (C.O.E.G.F) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CLUBS OMNISPORTS DES ELECTRICIENS ET GAZIERS DE FRANCE (CO-EGF) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CLUBS OMNISPORTS DES ELECTRICIENS ET GAZIERS DE FRANCE (C.O.E.G.F) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CLUBS OMNISPORTS DES ELECTRICIENS ET GAZIERS DE FRANCE (C.O.E.G.F) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CLUB OMNISPORTS DES ELECTRICIENS ET GAZIERS DE FRANCE (C.O.-E.G.F.) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 construction...
+[2026-05-02 12:35:44] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=construction&departement=75&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • POLYEXPERT CONSTRUCTION — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • CONSTRUCTEL CONSTRUCTIONS TELECOMMUNICA. — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • OPERATEUR DE COMPETENCES DE LA CONSTRUCTION — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • GAGNERAUD CONSTRUCTION — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   • DEMATHIEU BARD CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • EIFFAGE CONSTRUCTION EQUIPEMENTS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • EIFFAGE CONSTRUCTION HABITAT — effectif: 32, tel: non, site: non \u2192 35/100
+[scraper]   • LOCKROY CONSTRUCTION (LOCKROY CONSTRUCTION) — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • AMARENCO CONSTRUCTION — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   • NOVE CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • VM CONSTRUCTIONS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • SILVER CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • EIFFAGE CONSTRUCTION GRANDS PROJETS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • SOCIETE D ETUDES ET DE REALISATION DE GESTION IMMOBILIERE DE CONSTRUCTION (SERGIC) — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   • NOVARE CONSTRUCTION (HEMEA) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • HML CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CT CONSTRUCTION (CTC) — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • FOSTER CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CIE IMMOBILIERE CONSTRUCTION GESTION (CICOGE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • EIFFAGE CONSTRUCTION RESIDENTIEL ET FONCTIONNEL — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 salle de sport...
+[2026-05-02 12:35:46] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=salle+de+sport&departement=75&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 3 entreprises trouvées
+[scraper]   • ASS CULT SPORT JEAN BAPTISTE DE LA SALLE — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • COEUR DE CITE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • VILLE DE PARIS — effectif: 42, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 bien être massage...
+[2026-05-02 12:35:48] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=bien+%C3%AAtre+massage&departement=75&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 10 entreprises trouvées
+[scraper]   • L'UNIVERS DE L'OSTEO-MASSAGE : LA COMPAGNIE DU BIEN-ETRE — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • ASS DE BIEN ETRE MASSAGE AYURVEDIQUE (ABEMA) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • FEDERATION FRANCAISE DU MASSAGE BIEN ETRE (FFMBE) — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • AIDA OUERIEMMI (MASSAGE BIEN ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • ROBIN NADAL (ROBIN NADAL MASSAGE BIEN ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • HERVE RUPPIN (H14 MASSAGE SPORT & BIEN-ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • THIERRY HOCHART — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • DIMITRI RAVON (LE REPOS DES CHAKRAS - MASSAGE BIEN-ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • TAIB EAID (TAIB MASSAGES BIEN ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • GAELLE DUCHEMIN (GAELLE MASSAGE BIEN-ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+
+[scraper] === Résumé ===
+[scraper] Total: 153 prospects
+[scraper] \U0001f525 Chauds (\u226570): 0
+[scraper] \u26a1 Tièdes (40-69): 77
+[scraper] \u2744\ufe0f  Froids (<40): 76

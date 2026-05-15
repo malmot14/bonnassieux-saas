@@ -1,0 +1,178 @@
+
+[scraper] Zone: Rennes (dept 35)
+[scraper]   \u2192 restaurant...
+[2026-05-02 12:34:01] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=restaurant&departement=35&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • O'TACOS RESTAURANT I — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • AVEC RESTAURANT — effectif: 12, tel: non, site: non \u2192 65/100
+[scraper]   • SOCIETE EUROPEENNE DE DEVELOPPEMENT DE RESTAURANTS ITALIENS (SEDRI) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • RACINES RESTAURANT — effectif: 11, tel: non, site: non \u2192 65/100
+[scraper]   • RESTAURANT ZEST (RESTAURANT ZEST) — effectif: 03, tel: non, site: non \u2192 60/100
+[scraper]   • RESTAURANT  LUCA — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • PONTIVY RESTAURANT — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • RESTAURANT DE L'ETANG — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • RESTAURANT DES BOIS — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • AS DU RESTAURANT (BAR BRASSERIE DE LA MAIRIE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • SUWON RESTAURANT — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • RESTAURANT LE TROQUET — effectif: 00, tel: non, site: non \u2192 45/100
+[scraper]   • SB RESTAURANT (SB CONSULT RESTAURANT) — effectif: 11, tel: non, site: non \u2192 65/100
+[scraper]   • RESTAURANT L'OUVREE — effectif: 11, tel: non, site: non \u2192 65/100
+[scraper]   • BUAIS RESTAURANT — effectif: 03, tel: non, site: non \u2192 60/100
+[scraper]   • MONDIAL RESTAURANT — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • RESTAURANT LA VILLE CODET — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • SARL KAYS RESTAURANT (KEBAB DU LANDEL) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • LE FUN BAR RESTAURANT (LA GUINGUETTE DE SAINT JACUT) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • HOTEL RESTAURANT LE MAUPAS — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   \u2192 boulangerie...
+[2026-05-02 12:34:02] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=boulangerie&departement=35&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • BOULANGERIES BG (B B G) — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • BOULANGERIE NEUHAUSER — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   • LA BOULANGERIE DUMANT — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • BOULANGERIE DESMARIEUX FILS — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • BOULANGERIE PLEURTUIT — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE HALLIER — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • BOULANGERIE B — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • BOULANGERIE AU FEU DE BOIS (BOULANGERIE AU FEU DE BOIS) — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • LA BOULANGERIE D'A COTE — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • TI'MI BOULANGERIE PATISSERIE — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • BOULANGERIE SAINT-MALO — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • SARL GEM BOULANGERIE (MAISON GUICHARD) — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • BOULANGERIE CLOUARD — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • BOULANGERIE LE DIODIC — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • LA BOULANGERIE D'ARMOR — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • BOULANGERIE GEFFRAY (BOULANGERIE GEFFRAY) — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • BOULANGERIE VANDAME — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • BOULANGERIE PASQUIER — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • BOULANGERIE DU PRIEURE — effectif: 00, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE ANTOINE — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   \u2192 artisan...
+[2026-05-02 12:34:03] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=artisan&departement=35&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • ELITE ARTISAN — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • SOC INTERP ARTISAN GARANTIE INVESTISSE (SIAGI) — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • SCI DES ARTISANS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • L'ARTISANE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • L'ARTISAN (L'ARTISAN) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ARTISANES — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • L'ARTISAN COULEURS — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • L'ARTISAN FORMATEUR — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • JBH DES ARTISANS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ARTISANS COIFFEURS (LES ARTISANS COIFFEURS) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • SCI LES ARTISANS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • SCI DES ARTISANS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISAN COIFFEUR — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • TERRES D'ARTISANS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • L'ARTISAN DE LA MAISON — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • TY' ARTISANS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LE QUAI DES ARTISANS (LE QUAI DES ARTISANS) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • LES ARTISANS GOURMANDS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • AUX ARTISANS CREATEURS — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • ARTISANS DU MONDE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 coiffeur...
+[2026-05-02 12:34:04] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=coiffeur&departement=35&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • LE COIFFEUR (LE COIFFEUR) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • MB COIFFEUR VISAGISTE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • KARMA COIFFEUR — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • RIM COIFFEUR (RIM COIFFEUR) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • COIFFEUR NUMERO 1 (COIFFEUR NUMERO 1) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • LE PETIT ALBERT COIFFEUR (LE PETIT ALBERT) — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • COIFFEUR N 1 — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • HAPPY CURL — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • 14 NEMOURS (COIFFEUR & COMPAGNIE) — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • VALATELIER (L'ATELIER DES COIFFEURS) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • PLEDEX (COIFFEUR & COMPAGNIE) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • ELLA (LA CABANE DU COIFFEUR) — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • RAPHATELIER (ATELIER DES COIFFEURS) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • NATHALIE DESMONTS (NE ARTISAN COIFFEUR) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • S.P. — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • HOLDING PACE — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • 3ARTS (L'OFFICINE ARTISAN COIFFEUR) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • CHAFAA NAIT MAMMAR (CHAFAA COIFFEUR BARBIER) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   \u2192 plombier...
+[2026-05-02 12:34:05] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=plombier&departement=35&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 14 entreprises trouvées
+[scraper]   • J-C LE PLOMBIER — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LE SOURIRE DU PLOMBIER — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • MON PLOMBIER HUGO — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LE PLOMBIER BRETON (LE PLOMBIER BRETON) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • L'ATELIER DU PLOMBIER — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ELECTRICIENS PLOMBIERS BRETONS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • SIMON WERQUIN PLOMBIER - CHAUFFAGISTE (PCI PLOMBERIE CHAUFFAGE INTERVENTION) (SWPC) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • GROUPEMENT DES ARTISANS PLOMBIERS CHAUFFAGISTES ELECTRICIENS D'ILLE ET VILAINE (G.P.A.C. 35) — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • MON PLOMBIER DEBOUCHEUR — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ANSELMI ASSOCIES PLOMBIERS (AAP) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CHOLLET GWEN PLOMBIER CHAUFFAGISTE FRIGORIFISTE (CHOLLET GWEN PLOMBIER CHAUFFAGISTE FRIGORIFISTE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ERWAN GEHIN (GEHIN PLOMBIER) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • JEROME MALLARD (J.MALLARD PLOMBIER-CHAUFFAGISTE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • QUENTIN PERAN ([ND]) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 electricien...
+[2026-05-02 12:34:06] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=electricien&departement=35&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 7 entreprises trouvées
+[scraper]   • AS ELECTRICIEN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISAN ELECTRICIEN RUELLAN (ARTISAN ELECTRICIEN RUELLAN) (AER) — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • DG ARTISAN ELECTRICIEN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ANTHONY DANTEN (EPO ELECTRICIENS DU PHARE OUEST) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • JEROME GUILLARD (L'ELECTRICIEN RENNAIS) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 construction...
+[2026-05-02 12:34:07] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=construction&departement=35&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • SOCOTEC CONSTRUCTION — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • BUREAU VERITAS CONSTRUCTION — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • POLYEXPERT CONSTRUCTION — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • APAVE INFRASTRUCTURES ET CONSTRUCTION FRANCE — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • CONSTRUCTEL CONSTRUCTIONS TELECOMMUNICA. — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • OPERATEUR DE COMPETENCES DE LA CONSTRUCTION — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • CERUTTI CONSTRUCTION — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • MORTIER CONSTRUCTION — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • ALTA CONSTRUCTIONS — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • SA D'HLM  AIGUILLON CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • IRISOLARIS CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • EIFFAGE CONSTRUCTION BRETAGNE (ECB) — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • CIMEO CONSTRUCTION — effectif: 31, tel: non, site: non \u2192 40/100
+[scraper]   • DBL CONSTRUCTIONS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • 2LM CONSTRUCTIONS (2LM CONSTRUCTIONS) — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • OUEST ECO CONSTRUCTION — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • UNION NATIONALE DES INDUSTRIES DE CARRIERES ET MATERIAUX DE CONSTRUCTION (UNICEM) — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   • PAINT CONCEPT CONSTRUCTION — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • INGENIERIE CONCEPT ET CONSTRUCTION — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • CCL CONSTRUCTION — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   \u2192 salle de sport...
+[2026-05-02 12:34:09] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=salle+de+sport&departement=35&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • ESPERANCE SPORTS & LOISIRS BECHEREL — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ASS COM SPORTS LOISIRS CHAPELLE FOUG (ACSL) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • ESPERANCE LA BOUEXIERE BADMINTON — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • FOOTBALL CLUB DE GUIPRY MESSAC (FCGM) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • TONIC' GYM GERMANAISE — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • COURIR A BAINS — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • YOGA BAZOUGES — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • SECTION GYMNASTIQUE VOLONTAIRE BAIS — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • CLUB OMNISPORTS DU SUD VILAINE — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • VOLLEY BALL CLUB DE GUICHEN — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • ASS TENNIS GOVEN — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • ESPOIR IFFENDIC — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • AVANT GARDE DE TRESBOEUF — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • AMICALE SPORTIVE NOYALAISE — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • KERWATT (KERWATT S.A.S) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • AMICALE LAIQUE PLEURTUIT — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • GROUPEMENT DES JEUNES DU BOCAGE FOUGERAIS — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • VOLLEY-CLUB DE JAVENE — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • THOMAS MONFRAIS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • GYM CLUB LA CHAPELLE THOUARAULT — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   \u2192 bien être massage...
+[2026-05-02 12:34:10] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=bien+%C3%AAtre+massage&departement=35&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 6 entreprises trouvées
+[scraper]   • GHIZLANE KHABBABI (MASSAGE DU MONDE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • JENNIFER BERTHELOT (KEBAIKAN MASSAGES BIEN-ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • GWENAEL HERVE (HERVE) (GWENAEL HERVE MASSAGE BIEN ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • MARION SIMON (MARION SIMON PRATICIENNE EN MASSAGES DE BIEN-ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • PATRICE OUDARD (BIEN ETRE ET MASSAGES) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • VINCENT ROUSSEL (BREIZH RAMONE TA HUTTE) — effectif: NN, tel: non, site: non \u2192 35/100
+
+[scraper] === Résumé ===
+[scraper] Total: 143 prospects
+[scraper] \U0001f525 Chauds (\u226570): 0
+[scraper] \u26a1 Tièdes (40-69): 104
+[scraper] \u2744\ufe0f  Froids (<40): 39

@@ -1,0 +1,4 @@
+INSERT INTO "prospectsPotentiels" (name, sector, address, city, phone, email, website, latitude, longitude, score, "webVisibilityScore", "hasWebsite", "hasActiveWebsite", "hasSocialMedia", status, "createdAt", "updatedAt") VALUES
+('COEUR DE CITE', 'artisans', 'SALLE DE SPORT HOTEL DIEU 1 PL DU PARVIS NOTRE DAME 75004 PARIS 4', 'Paris', NULL, NULL, NULL, 48.854632353, 2.348810684, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('VILLE DE PARIS', 'artisans', '4 PL HOTEL VILLE ESP LIBERATION 75004 PARIS 04', 'Paris', NULL, NULL, NULL, 48.856507956, 2.3520586814, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('ASS DE BIEN ETRE MASSAGE AYURVEDIQUE (ABEMA)', 'artisans', 'M. MIGNOT ANTOINE 23 RUE DE BELLEVILLE 75019 PARIS', 'Paris', NULL, NULL, NULL, 48.872793726, 2.3789654146, 35, 35, false, false, false, 'nouveau', NOW(), NOW());

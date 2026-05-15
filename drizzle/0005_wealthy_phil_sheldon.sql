@@ -1,0 +1,23 @@
+CREATE TABLE `prospectsPotentiels` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`name` varchar(255) NOT NULL,
+	`sector` enum('artisans','restaurants','sport/bien-être','BTP','autre') NOT NULL,
+	`address` text,
+	`city` varchar(100) DEFAULT 'Caen',
+	`phone` varchar(20),
+	`email` varchar(320),
+	`website` varchar(500),
+	`latitude` decimal(10,8),
+	`longitude` decimal(11,8),
+	`score` int DEFAULT 0,
+	`webVisibilityScore` int DEFAULT 0,
+	`hasWebsite` boolean DEFAULT false,
+	`hasActiveWebsite` boolean DEFAULT false,
+	`hasSocialMedia` boolean DEFAULT false,
+	`notes` longtext,
+	`status` enum('nouveau','contacté','intéressé','converti','ignoré') NOT NULL DEFAULT 'nouveau',
+	`lastContactDate` timestamp,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `prospectsPotentiels_id` PRIMARY KEY(`id`)
+);

@@ -1,0 +1,163 @@
+
+[scraper] Zone: Caen (dept 14)
+[scraper]   \u2192 restaurant...
+[2026-05-02 12:23:31] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=restaurant&departement=14&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • L'ENCLUME (RESTAURANT) — effectif: 00, tel: non, site: non \u2192 45/100
+[scraper]   • LES RESTAURANTS DU COEUR — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • RESTAURANTS DU COEUR — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • RESTAURANT LE POMMIER — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • RESTAURANT L'ETOILE — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • RESTAURANT ISTANBUL — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • VL RESTAURANT — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CB RESTAURANT — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • AARAN RESTAURANT — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • RESTAURANT MA CAMPAGNE (MA CAMPAGNE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • SA RESTAURANT LA MARINE — effectif: 11, tel: non, site: non \u2192 65/100
+[scraper]   • RESTAURANT ASIATIQUE — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • RESTAURANT DU COEUR — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • RESTAURANT DE LA MAREE — effectif: 11, tel: non, site: non \u2192 65/100
+[scraper]   • RESTAURANT L'ENTRE-DEUX SARL — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • RESTAURANT PIZZA LA BELLE EPOQUE — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • SA HOTEL RESTAURANT LE DAUPHIN — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • HECTOR BEHUET RESTAURANT (HISTOIRE 2) — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • RESTAURANT QUAI EST (LE QUAI EST) — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • KARIBU AFRO RESTAURANT (KARIBU AFRO RESTAURANT) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   \u2192 boulangerie...
+[2026-05-02 12:23:32] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=boulangerie&departement=14&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • BOULANGERIES BG (B B G) — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • BOULANGERIES PAUL — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • ZENITH BOULANGERIE — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • BOULANGERIE DE PARIS — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • BOULANGERIE BAYEUX — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE RATEL — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • BOULANGERIE KAIB (LES OLIVIERS) — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • BOULANGERIE LISIEUX — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE HONFLEUR — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE CAEN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • COMPAGNIE NORMANDE DE PATISSERIE ET BOULANGERIE (CNPB) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE PATISSERIE FARDIN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE PATISSERIE PERSIGNY — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • SAS BOULANGERIE VIGOU-RABOTEAU (INTUITION GOURMANDE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE BERTRAND (BOULANGERIE BERTRAND) — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • BOULANGERIE DE LA POSTE (BOULANGERIE DE LA POSTE) — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • BOULANGERIE GAUTIER — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE DU BOURG — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BOULANGERIE DUBOURG — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • BOULANGERIE D ARGOUGES (BOULANGERIE D ARGOUGES) — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   \u2192 artisan...
+[2026-05-02 12:23:33] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=artisan&departement=14&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • SOC INTERP ARTISAN GARANTIE INVESTISSE (SIAGI) — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • ARTISANS DE L'OUEST (ARTISANS DE L'OUEST) — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • L'ARTISAN — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • LES ARTISANS DU BONHEUR (LES ARTISANS DU BONHEUR) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • COMMERCANTS ARTISANS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • AUX DEUX ARTISANS (AUX DEUX ARTISANS) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISANS DU BILLARD — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • SPIRIT ARTISAN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • L'ARTISAN TENDANCE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ARTISANS DE LA PAIX — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • PARRAINE MON ARTISAN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • L'ARTISAN DU NET (L'ARTISAN DU NET) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ARTISANS DE PAIX — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISANS DU MONDE CAEN CALVADOS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • SCI DE LA MAISON DE L ARTISAN — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ARTISAN CD BATIMENT (ARTISAN CD BATIMENT) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LES ARTISANS COIFFEURS DE BAYEUX (LES ARTISANS COIFFEURS DE BAYEUX) — effectif: 03, tel: non, site: non \u2192 60/100
+[scraper]   • ARTISAN CARRELEUR NORMAND — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LA MAISON DES ARTISANS & CREATEURS — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • HONFLEUR ARTISANS D'ART — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   \u2192 coiffeur...
+[2026-05-02 12:23:34] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=coiffeur&departement=14&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • COLIN VAUTIER COIFFEUR (COLIN-VAUTIER) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • SAS LE COIFFEUR — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • COIFFEUR HASSEN — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • L'ATELIER DU COIFFEUR — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • COIFFEURS EXPERTS — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • LE COMPTOIR DU COIFFEUR (LE COMPTOIR DU COIFFEUR) — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • NOUE ARTISAN COIFFEUR — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • CHEZ MOMO COIFFEUR — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • CHAMBRE SYND COIFFEURS CALVADOS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • HAPPY CURL — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • MAXETCOMPAGNIE — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • PMV — effectif: 03, tel: non, site: non \u2192 60/100
+[scraper]   • LOUMAX (CARPY COIFFEUR) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • ECJ — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • FANNY LEPERE (BEBIN) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • LAURA BROCHET (LAURA B COIFFEUR) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • VIDA (MEDARD COIFFEUR VISAGISTE) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • HUGUETTTE & CO (COIFFEUR CHEZ HUGUETTE) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   • LAURENCE DELHOMME (TORTINIERE) — effectif: 02, tel: non, site: non \u2192 55/100
+[scraper]   \u2192 plombier...
+[2026-05-02 12:23:35] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=plombier&departement=14&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 11 entreprises trouvées
+[scraper]   • DENIS PLOMBIER (DENIS PLOMBIER) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • L'ATELIER DU PLOMBIER (L'ATELIER DU PLOMBIER) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BASLEY CLAUDE PLOMBIER CHAUFFAGISTE — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • PLOMBIER DEPAN'SERVICE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • OKTAY TABAK (LE PLOMBIER NORMAND) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • RIDHA HAMMADI (BON PLOMBIER) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ETABLISSEMENT LUCIEN (LS SERVICES - OBJECTIF MAISON RESPONSABLE) — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • DAVID BLANCHARD (BLANCHARD DAVID PLOMBIER CHAUFFAGISTE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • JACQUOT PLOMBERIE (LUDOVIC JACQUOT PLOMBIER CHAUFFAGISTE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • JEAN REMAUD (JP-REMAUD PLOMBIER-CHAUFFAGISTE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • STEPHANE LEROY — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   \u2192 electricien...
+[2026-05-02 12:23:36] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=electricien&departement=14&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 8 entreprises trouvées
+[scraper]   • ELECTRICIENS SANS FRONTIERES L'ENERGIE DU DEVELOPPEMENT — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • LE BOULANGER ELECTRICIEN (LBE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • COMPTOIR DES ELECTRICIENS (CDE CONNECT) (CDE) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • L'ELECTRICIEN TURET (L'ELECTRICIEN TURET) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • SOCIETE NOUVELLE DES ETABLISSEMENTS JULES VERGER ET DELPORTE-LES ELECTRICIENS DE FRANCE V.D (VD) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ELECTRICIENS SANS FRONTIERES BASSE NORMANDIE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • ANDRE PATUREL — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • GARY DUBOSQ (GARY ELECTRICIEN) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 construction...
+[2026-05-02 12:23:37] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=construction&departement=14&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 20 entreprises trouvées
+[scraper]   • SOCOTEC CONSTRUCTION — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • BUREAU VERITAS CONSTRUCTION — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • APAVE INFRASTRUCTURES ET CONSTRUCTION FRANCE — effectif: 12, tel: non, site: non \u2192 55/100
+[scraper]   • ALTITUDE INFRASTRUCTURE CONSTRUCTION — effectif: 11, tel: non, site: non \u2192 55/100
+[scraper]   • OPERATEUR DE COMPETENCES DE LA CONSTRUCTION — effectif: 22, tel: non, site: non \u2192 45/100
+[scraper]   • GAGNERAUD CONSTRUCTION — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   • EIFFAGE CONSTRUCTION SAVARE — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   • OUEST ECO CONSTRUCTION — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • FABRICE JURZAK CONSTRUCTIONS SA (COPANOR - DERBA) — effectif: 03, tel: non, site: non \u2192 50/100
+[scraper]   • M2M CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • VM CONSTRUCTIONS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • BSO CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • KARACA CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • HTC CONSTRUCTIONS — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • QUINCE CONSTRUCTION — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   • MG CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • RB CONSTRUCTION (RB CONSTRUCTION) — effectif: 02, tel: non, site: non \u2192 45/100
+[scraper]   • L.E CONSTRUCTION — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • EIFFAGE CONSTRUCTION BASSE NORMANDIE (EIFFAGE CONSTRUCTION BASSE NORMANDIE) — effectif: 21, tel: non, site: non \u2192 50/100
+[scraper]   • CONSTRUCTION BATIMENTS ET PREFABRIQUES (COPREBAT) — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   \u2192 salle de sport...
+[2026-05-02 12:23:38] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=salle+de+sport&departement=14&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 6 entreprises trouvées
+[scraper]   • ASSOCIATION SPORT EN SALLE HERMANVILLE — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   • MAROLLES SPORTS ET LOISIRS — effectif: 01, tel: non, site: non \u2192 40/100
+[scraper]   • ASS SPORTS ET LOISIRS DE BOUGY — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • PAC SPORTS ET LOISIRS — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • TENNIS CLUB DE CAUMONT L'EVENTE — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • ASSOCIATION GYMNASTIQUE GRAINVILLE (A.G.G.) — effectif: 01, tel: non, site: non \u2192 50/100
+[scraper]   \u2192 bien être massage...
+[2026-05-02 12:23:40] INFO: Fetched (200) <GET https://recherche-entreprises.api.gouv.fr/search?q=bien+%C3%AAtre+massage&departement=14&page=1&per_page=20&etat_administratif=A> (referer: https://www.google.com/)
+[scraper]   \u2713 4 entreprises trouvées
+[scraper]   • MASSAGES & BIEN ETRE — effectif: NN, tel: non, site: non \u2192 35/100
+[scraper]   • SEVERINE BAUDRY (HUBERT) (MASSAGE BIEN ETRE ET MAGNETISME) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • ANA-LUNA SAN ROMAN MARTINEZ (ANA MASSAGES & BIEN ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+[scraper]   • DELPHINE BRUNE (DELPHINE BRUNE MASSAGE BIEN-ETRE) — effectif: NN, tel: non, site: non \u2192 45/100
+
+[scraper] === Résumé ===
+[scraper] Total: 128 prospects
+[scraper] \U0001f525 Chauds (\u226570): 0
+[scraper] \u26a1 Tièdes (40-69): 75
+[scraper] \u2744\ufe0f  Froids (<40): 53

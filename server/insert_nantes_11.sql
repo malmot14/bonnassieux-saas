@@ -1,0 +1,10 @@
+INSERT INTO "prospectsPotentiels" (name, sector, address, city, phone, email, website, latitude, longitude, score, "webVisibilityScore", "hasWebsite", "hasActiveWebsite", "hasSocialMedia", status, "createdAt", "updatedAt") VALUES
+('CONSTRUCTION', 'BTP', '120 B RUE MAURICE SAMBRON 44160 PONTCHATEAU', 'Nantes', NULL, NULL, NULL, 47.445845899, -2.090206243, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('VINCI CONSTRUCTION FRANCE', 'BTP', 'L ARCHIPEL 1973 BOULEVARD DE LA DEFENSE 92000 NANTERRE', 'Nantes', NULL, NULL, NULL, 48.8971494011327, 2.22653088089135, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('DEMATHIEU BARD CONSTRUCTION', 'BTP', '17 RUE VENIZELOS 57950 MONTIGNY-LES-METZ', 'Nantes', NULL, NULL, NULL, 49.095650538, 6.1431213572, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('SA D''HLM  AIGUILLON CONSTRUCTION', 'artisans', '60 AVENUE DU CANADA 35200 RENNES', 'Nantes', NULL, NULL, NULL, 48.0812796119514, -1.67856101689343, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('BOUYGUES CONSTRUCTION', 'BTP', 'CHALLENGER 1 AVENUE EUGENE FREYSSINET 78280 GUYANCOURT', 'Nantes', NULL, NULL, NULL, 48.784981902, 2.0653983724, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('DBL CONSTRUCTIONS', 'artisans', 'ZAC DE L''EPI D''OR 22 RUE DE L''EPI D''OR 94800 VILLEJUIF', 'Nantes', NULL, NULL, NULL, 48.785590798, 2.3525423299, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('NANTES BASKET SPORT', 'artisans', 'SALLE SPORTIVE METROPOLITAINE 91 RUE DE LA TROCARDIERE 44400 REZE', 'Nantes', NULL, NULL, NULL, 47.180317924, -1.571936913, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('ASSOCIATION MUSICALE SEVRE ET MUSIQUE', 'artisans', 'SALLE POLYVALENTE DE LOISIRS RUE DES SPORTS 44330 LE PALLET', 'Nantes', NULL, NULL, NULL, 47.14134026, -1.335996568, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('L ESPERANCE DE CAMPBON', 'artisans', 'SALLE DE L ESPERANCE 48 AVENUE DES SPORTS 44750 CAMPBON', 'Nantes', NULL, NULL, NULL, 47.4079414129541, -1.9703015034176, 35, 35, false, false, false, 'nouveau', NOW(), NOW());

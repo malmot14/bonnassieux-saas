@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1777298650095,
+      "tag": "0000_icy_big_bertha",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1777298909880,
+      "tag": "0001_steep_whirlwind",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1777305644625,
+      "tag": "0002_moaning_frank_castle",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1777306274330,
+      "tag": "0003_misty_thaddeus_ross",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1777306711187,
+      "tag": "0004_needy_kang",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1777308790096,
+      "tag": "0005_wealthy_phil_sheldon",
+      "breakpoints": true
+    }
+  ]
+}

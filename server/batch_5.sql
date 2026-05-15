@@ -1,0 +1,9 @@
+INSERT INTO "prospectsPotentiels" (name, sector, address, city, phone, email, website, latitude, longitude, score, "webVisibilityScore", "hasWebsite", "hasActiveWebsite", "hasSocialMedia", status, "createdAt", "updatedAt") VALUES
+('VM CONSTRUCTIONS', 'BTP', '1204 ROUTE DE LA BELLEVUE 76160 PREAUX', 'Caen', NULL, NULL, NULL, 49.5009260118167, 1.20311174138284, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('BSO CONSTRUCTION', 'artisans', '110 RUE PETIT 75019 PARIS', 'Caen', NULL, NULL, NULL, 48.8862318148437, 2.3918131627694, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('KARACA CONSTRUCTION', 'BTP', '8 RUE MOHANDAS GANDHI 14850 HEROUVILLETTE', 'Caen', NULL, NULL, NULL, 49.223518273, -0.240294887, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('HTC CONSTRUCTIONS', 'BTP', '10 ALLEE LOUIS GRAMPA 93390 CLICHY-SOUS-BOIS', 'Caen', NULL, NULL, NULL, 48.908582898, 2.5370524544, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('MG CONSTRUCTION', 'BTP', 'CENTRE ROUTIER DE ROUEN AVENUE FRANKLIN ROOSEVELT 76120 LE GRAND-QUEVILLY', 'Caen', NULL, NULL, NULL, 49.398586376, 1.0613755285, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('L.E CONSTRUCTION', 'BTP', '7 IMPASSE DE L''OREE DU BOIS 14210 BARON-SUR-ODON', 'Caen', NULL, NULL, NULL, 49.1360223732896, -0.47408294585152, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('CONSTRUCTION BATIMENTS ET PREFABRIQUES (COPREBAT)', 'artisans', '128 RUE LA BOETIE 75008 PARIS', 'Caen', NULL, NULL, NULL, 48.870973756, 2.3058596405, 35, 35, false, false, false, 'nouveau', NOW(), NOW()),
+('MASSAGES & BIEN ETRE', 'artisans', '7 AVENUE ALBERT SERGENT 14390 CABOURG', 'Caen', NULL, NULL, NULL, 49.290457349, -0.122071381, 35, 35, false, false, false, 'nouveau', NOW(), NOW());
