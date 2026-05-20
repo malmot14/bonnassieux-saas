@@ -118,6 +118,20 @@ export const appointments = pgTable("appointments", {
 export type Appointment = typeof appointments.$inferSelect;
 export type InsertAppointment = typeof appointments.$inferInsert;
 
+export const messageTemplates = pgTable("messageTemplates", {
+  id: serial("id").primaryKey(),
+  type: text("type").$type<"email" | "whatsapp">().notNull(),
+  sector: text("sector").notNull(),
+  subject: varchar("subject", { length: 255 }),
+  content: text("content").notNull(),
+  isDefault: boolean("isDefault").default(false),
+  createdAt: timestamp("createdAt", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export type MessageTemplate = typeof messageTemplates.$inferSelect;
+export type InsertMessageTemplate = typeof messageTemplates.$inferInsert;
+
 export const prospectsPotentiels = pgTable("prospectsPotentiels", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),

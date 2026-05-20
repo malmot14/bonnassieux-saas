@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { Star, MapPin, Globe, Phone, Mail, Plus, Users, TrendingUp, MessageCircle, CheckCircle, AlertCircle, ChevronLeft, ChevronRight, Calendar, Clock, FileText } from "lucide-react";
+import { Star, MapPin, Globe, Phone, Mail, Plus, Users, TrendingUp, MessageCircle, CheckCircle, AlertCircle, ChevronLeft, ChevronRight, Calendar, Clock, FileText, ExternalLink } from "lucide-react";
 import { MapView } from "@/components/Map";
 import { useEffect, useState, useRef } from "react";
 import { getScoreColor, getMarkerColor, getScoreDescription } from "@/lib/scoring";
@@ -30,9 +30,25 @@ interface Prospect {
 
 export default function ProspectsPotentiels() {
   // Charger les prospects depuis la base de données
+  const utils = trpc.useUtils();
   const { data: dbProspects = [], isLoading } = trpc.prospects.list.useQuery();
-  const convertToLeadMutation = trpc.prospectsPotentiels.convertToLead.useMutation();
-  
+
+  const convertToLeadMutation = trpc.prospectsPotentiels.convertToLead.useMutation({
+    onSuccess: (lead) => {
+      if (lead?.id) setConvertedLeadId(lead.id);
+    },
+  });
+
+  const updateProspectMutation = trpc.prospectsPotentiels.update.useMutation({
+    onSuccess: () => { utils.prospects.list.invalidate(); toast.success("Note enregistrée"); setNewNote(""); },
+    onError: () => toast.error("Erreur lors de l'enregistrement"),
+  });
+
+  const createAppointmentMutation = trpc.appointments.create.useMutation({
+    onSuccess: () => { toast.success("RDV planifié !"); setShowAppointmentForm(false); setRdvDate(""); setRdvTime("10:00"); setRdvLocation(""); },
+    onError: () => toast.error("Erreur lors de la création du RDV"),
+  });
+
   const [prospects, setProspects] = useState<Prospect[]>([]);
   const [selectedProspect, setSelectedProspect] = useState<Prospect | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -40,17 +56,36 @@ export default function ProspectsPotentiels() {
   const [hotOnly, setHotOnly] = useState(false);
   const [siteWebPriority, setSiteWebPriority] = useState(false);
   const [convertedProspectIds, setConvertedProspectIds] = useState<Set<number>>(new Set());
+  const [convertedLeadId, setConvertedLeadId] = useState<number | null>(null);
   const [showAppointmentForm, setShowAppointmentForm] = useState(false);
   const [newNote, setNewNote] = useState("");
+  const [rdvDate, setRdvDate] = useState("");
+  const [rdvTime, setRdvTime] = useState("10:00");
+  const [rdvDuration, setRdvDuration] = useState("30");
+  const [rdvLocation, setRdvLocation] = useState("");
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [previewPrompt, setPreviewPrompt] = useState("");
+  const [editingWebsite, setEditingWebsite] = useState(false);
+  const [websiteInput, setWebsiteInput] = useState("");
   const [showEmailForm, setShowEmailForm] = useState(false);
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
   const mapRef = useRef<google.maps.Map | null>(null);
   const prospectDetailRef = useRef<HTMLDivElement>(null);
-  // Refs pour gérer proprement les marqueurs et info-windows
   const markersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>([]);
   const [mapReady, setMapReady] = useState(false);
   const [miniCardProspect, setMiniCardProspect] = useState<Prospect | null>(null);
+
+  // Réinitialiser l'état du panneau quand on change de prospect
+  useEffect(() => {
+    setConvertedLeadId(null);
+    setNewNote("");
+    setShowAppointmentForm(false);
+    setRdvDate("");
+    setRdvTime("10:00");
+    setRdvLocation("");
+    setEditingWebsite(false);
+  }, [selectedProspect?.id]);
 
   // Mettre à jour les prospects quand les données de la BD arrivent
   useEffect(() => {
@@ -319,16 +354,16 @@ export default function ProspectsPotentiels() {
                   }
                 }}
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold text-gray-900">{index + 1}</span>
-                      <h3 className="font-semibold text-gray-900">{prospect.name}</h3>
-                    </div>
-                    <p className="text-xs text-gray-600 mt-1">{prospect.sector}</p>
-                    <Badge className={`mt-2 ${getScoreColor(prospect.score)}`}>
-                      {prospect.score}/100
-                    </Badge>
+                <div className="flex items-center gap-3">
+                  <span
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
+                    style={{ backgroundColor: getMarkerColor(prospect.score) }}
+                  >
+                    {index + 1}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-gray-900 truncate">{prospect.name}</h3>
+                    <p className="text-xs text-gray-500 mt-0.5">{prospect.sector} · {prospect.score}/100</p>
                   </div>
                 </div>
               </Card>
@@ -379,17 +414,52 @@ export default function ProspectsPotentiels() {
                   </div>
                 </div>
 
-                {selectedProspect.website && (
-                  <div className="flex items-start gap-3 p-3 bg-white rounded-lg border border-gray-200">
-                    <Globe className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs text-gray-600 font-semibold uppercase">Site web</p>
-                      <a href={selectedProspect.website} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline font-semibold break-all">
-                        {selectedProspect.website}
-                      </a>
-                    </div>
+                <div className="flex items-start gap-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <Globe className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-gray-600 font-semibold uppercase">Site web</p>
+                    {editingWebsite ? (
+                      <div className="flex gap-2 mt-1">
+                        <Input
+                          value={websiteInput}
+                          onChange={e => setWebsiteInput(e.target.value)}
+                          placeholder="https://..."
+                          className="h-7 text-xs flex-1"
+                          autoFocus
+                          onKeyDown={e => {
+                            if (e.key === "Enter") {
+                              const url = websiteInput.trim() || undefined;
+                              setSelectedProspect(p => p ? { ...p, website: url } : p);
+                              updateProspectMutation.mutate({ id: selectedProspect.id!, website: url ?? null });
+                              setEditingWebsite(false);
+                            }
+                            if (e.key === "Escape") setEditingWebsite(false);
+                          }}
+                        />
+                        <Button size="sm" className="h-7 text-xs px-2" onClick={() => {
+                          const url = websiteInput.trim() || undefined;
+                          setSelectedProspect(p => p ? { ...p, website: url } : p);
+                          updateProspectMutation.mutate({ id: selectedProspect.id!, website: url ?? null });
+                          setEditingWebsite(false);
+                        }}>OK</Button>
+                        <Button size="sm" variant="outline" className="h-7 text-xs px-2" onClick={() => setEditingWebsite(false)}>✕</Button>
+                      </div>
+                    ) : selectedProspect.website ? (
+                      <div className="flex items-center gap-2">
+                        <a href={selectedProspect.website} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline font-semibold break-all flex-1">
+                          {selectedProspect.website}
+                        </a>
+                        <button onClick={() => { setWebsiteInput(selectedProspect.website || ""); setEditingWebsite(true); }} className="text-gray-400 hover:text-gray-600 flex-shrink-0" title="Modifier">
+                          ✎
+                        </button>
+                      </div>
+                    ) : (
+                      <button onClick={() => { setWebsiteInput(""); setEditingWebsite(true); }} className="text-xs text-gray-400 hover:text-blue-600 mt-0.5 italic">
+                        + Ajouter un site web
+                      </button>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
             </div>
 
@@ -460,12 +530,28 @@ export default function ProspectsPotentiels() {
                       </div>
                     );
                   })()}
-                  {selectedProspect.websiteType === "aggregator" && (
-                    <div className="flex items-start gap-2">
-                      <AlertCircle className="w-4 h-4 text-yellow-500 flex-shrink-0 mt-0.5" />
-                      <div><span className="font-semibold text-gray-700">Site web : </span><span className="text-gray-600">Annuaire uniquement — proposer site indépendant pour ne plus dépendre d'un tiers</span></div>
-                    </div>
-                  )}
+                  {selectedProspect.websiteType === "aggregator" && (() => {
+                    const s = selectedProspect.sector;
+                    const isCoiffeur = s === "artisans";
+                    const isSport = s === "sport/bien-être";
+                    const isResto = s === "restaurants";
+                    const isBTP = s === "BTP";
+                    return (
+                      <div className="flex items-start gap-2">
+                        <AlertCircle className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <span className="font-semibold text-gray-700">Site web : </span>
+                          <span className="text-gray-600">
+                            {isCoiffeur && "Planity/Treatwell uniquement — paie une commission sur chaque réservation, un site propre l'en affranchit"}
+                            {isSport && "Plateforme de réservation tierce — dépendant des commissions, un site avec agenda intégré lui fait économiser chaque mois"}
+                            {isResto && "TheFork/Tripadvisor uniquement — commission par couvert, un site avec réservation directe supprime cet intermédiaire"}
+                            {isBTP && "Annuaire uniquement (PagesJaunes/Houzz) — visibilité faible et payante, un site vitrine attire directement les chantiers"}
+                            {!isCoiffeur && !isSport && !isResto && !isBTP && "Présence via plateforme tierce — proposer un site indépendant pour ne plus payer de commission"}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })()}
                   {selectedProspect.websiteType === "pro" && (
                     <div className="flex items-start gap-2">
                       <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
@@ -573,6 +659,45 @@ export default function ProspectsPotentiels() {
                   : "Ajouter à mes Leads"}
               </Button>
 
+              {/* Bouton aperçu site */}
+              <Button
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold"
+                onClick={() => { setPreviewPrompt(""); setShowPreviewModal(true); }}
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Générer l'aperçu site
+              </Button>
+
+              {/* Modal aperçu */}
+              {showPreviewModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setShowPreviewModal(false)}>
+                  <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4 space-y-4" onClick={e => e.stopPropagation()}>
+                    <h3 className="font-bold text-gray-900 text-lg">Aperçu site — {selectedProspect?.name}</h3>
+                    <p className="text-sm text-gray-500">Ajoutez un message personnalisé qui apparaîtra sur le site (facultatif).</p>
+                    <Textarea
+                      placeholder='Ex: "Spécialiste urgences 24h/7j", "Cuisine du terroir normand", "Coach certifié STAPS"...'
+                      className="h-24 resize-none text-sm"
+                      value={previewPrompt}
+                      onChange={e => setPreviewPrompt(e.target.value)}
+                    />
+                    <div className="flex gap-3">
+                      <Button variant="outline" className="flex-1" onClick={() => setShowPreviewModal(false)}>Annuler</Button>
+                      <Button
+                        className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
+                        onClick={() => {
+                          const url = `/preview/${selectedProspect?.id}?prompt=${encodeURIComponent(previewPrompt)}`;
+                          window.open(url, '_blank');
+                          setShowPreviewModal(false);
+                        }}
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Ouvrir l'aperçu
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div className="grid grid-cols-3 gap-2">
                 <Dialog open={showEmailForm} onOpenChange={setShowEmailForm}>
                   <DialogTrigger asChild>
@@ -664,6 +789,11 @@ export default function ProspectsPotentiels() {
                     <Calendar className="w-4 h-4" />
                     Prendre un rendez-vous
                   </h3>
+                  {!convertedLeadId && (
+                    <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded px-2 py-1">
+                      Ajoutez d'abord ce prospect à vos leads pour planifier un RDV.
+                    </p>
+                  )}
                   <div className="grid grid-cols-2 gap-2">
                     <div>
                       <label className="text-xs font-semibold text-gray-700 block mb-1">Date</label>
@@ -671,6 +801,8 @@ export default function ProspectsPotentiels() {
                         type="date"
                         className="w-full text-xs"
                         min={new Date().toISOString().split('T')[0]}
+                        value={rdvDate}
+                        onChange={(e) => setRdvDate(e.target.value)}
                       />
                     </div>
                     <div>
@@ -678,17 +810,22 @@ export default function ProspectsPotentiels() {
                       <Input
                         type="time"
                         className="w-full text-xs"
-                        defaultValue="10:00"
+                        value={rdvTime}
+                        onChange={(e) => setRdvTime(e.target.value)}
                       />
                     </div>
                   </div>
                   <div>
                     <label className="text-xs font-semibold text-gray-700 block mb-1">Durée</label>
-                    <select className="w-full px-2 py-1 text-xs border border-gray-300 rounded">
-                      <option>15 min</option>
-                      <option selected>30 min</option>
-                      <option>45 min</option>
-                      <option>1 heure</option>
+                    <select
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded"
+                      value={rdvDuration}
+                      onChange={(e) => setRdvDuration(e.target.value)}
+                    >
+                      <option value="15">15 min</option>
+                      <option value="30">30 min</option>
+                      <option value="45">45 min</option>
+                      <option value="60">1 heure</option>
                     </select>
                   </div>
                   <div>
@@ -697,11 +834,29 @@ export default function ProspectsPotentiels() {
                       type="text"
                       placeholder="Sur site, téléphone..."
                       className="w-full text-xs"
+                      value={rdvLocation}
+                      onChange={(e) => setRdvLocation(e.target.value)}
                     />
                   </div>
-                  <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold">
+                  <Button
+                    className="w-full bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold"
+                    disabled={createAppointmentMutation.isPending || !convertedLeadId}
+                    onClick={() => {
+                      if (!convertedLeadId) { toast.error("Ajoutez ce prospect à vos leads d'abord"); return; }
+                      if (!rdvDate) { toast.error("Sélectionnez une date"); return; }
+                      const scheduledDate = new Date(`${rdvDate}T${rdvTime}:00`);
+                      createAppointmentMutation.mutate({
+                        leadId: convertedLeadId,
+                        scheduledDate,
+                        duration: parseInt(rdvDuration),
+                        location: rdvLocation || selectedProspect?.address || "",
+                        status: "planifié",
+                        notes: `RDV avec ${selectedProspect?.name}`,
+                      });
+                    }}
+                  >
                     <Calendar className="w-3 h-3 mr-1" />
-                    Confirmer le RDV
+                    {createAppointmentMutation.isPending ? "Planification…" : "Confirmer le RDV"}
                   </Button>
                 </div>
               )}
@@ -720,14 +875,14 @@ export default function ProspectsPotentiels() {
                 <Button
                   size="sm"
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold"
+                  disabled={updateProspectMutation.isPending}
                   onClick={() => {
-                    if (newNote.trim()) {
-                      toast.success("Note ajoutée");
-                      setNewNote("");
-                    }
+                    if (!newNote.trim()) return;
+                    if (!selectedProspect.id) { toast.error("Prospect sans ID"); return; }
+                    updateProspectMutation.mutate({ id: selectedProspect.id, notes: newNote });
                   }}
                 >
-                  Ajouter la note
+                  {updateProspectMutation.isPending ? "Enregistrement…" : "Ajouter la note"}
                 </Button>
               </div>
 

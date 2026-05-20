@@ -1,5 +1,5 @@
 import { trpc } from "@/lib/trpc";
-import { ArrowUpRight, MapPin, TrendingUp, Users } from "lucide-react";
+import { ArrowUpRight, MapPin, TrendingUp, Users, Flame, PhoneCall, Car, Mail, MessageCircle, FileText } from "lucide-react";
 import { useLocation } from "wouter";
 
 const VIOLET = "#8B5CF6";
@@ -12,6 +12,7 @@ const BORDER = "rgba(139, 92, 246, 0.15)";
 
 export default function Dashboard() {
   const { data: leads, isLoading } = trpc.leads.list.useQuery();
+  const { data: recentInteractions = [] } = trpc.interactions.recent.useQuery({ limit: 8 });
   const [, setLocation] = useLocation();
 
   if (isLoading) {
@@ -60,6 +61,10 @@ export default function Dashboard() {
     { label: "Signés", count: signed, color: "#16a34a" },
     { label: "Perdus", count: lost, color: "#D1D5DB" },
   ];
+
+  const hotLeads = (leads || [])
+    .filter(l => l.priority === "haute" && (l.status === "À visiter" || l.status === "En cours"))
+    .slice(0, 5);
 
   const today = new Date().toLocaleDateString("fr-FR", {
     weekday: "long",
@@ -226,37 +231,24 @@ export default function Dashboard() {
           </div>
 
           {/* Right column */}
-          <div className="pl-10">
+          <div className="pl-10 flex flex-col gap-8">
 
             {/* Secteurs */}
-            <div className="mb-10">
-              <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: GRAY }}>
+            <div>
+              <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: GRAY }}>
                 Par secteur
               </p>
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {sectors.map((sector) => (
                   <div key={sector.key}>
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-sm font-medium" style={{ color: DARK }}>
-                        {sector.name}
-                      </span>
-                      <span
-                        className="text-sm tabular-nums font-bold"
-                        style={{ color: VIOLET_DARK }}
-                      >
-                        {sector.count}
-                      </span>
+                      <span className="text-sm font-medium" style={{ color: DARK }}>{sector.name}</span>
+                      <span className="text-sm tabular-nums font-bold" style={{ color: VIOLET_DARK }}>{sector.count}</span>
                     </div>
-                    <div
-                      className="h-1.5 rounded-full overflow-hidden"
-                      style={{ background: "rgba(139,92,246,0.1)" }}
-                    >
+                    <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(139,92,246,0.1)" }}>
                       <div
                         className="h-full rounded-full transition-all duration-700 ease-out"
-                        style={{
-                          width: `${(sector.count / maxSector) * 100}%`,
-                          background: `linear-gradient(90deg, ${VIOLET}, ${VIOLET_DARK})`,
-                        }}
+                        style={{ width: `${(sector.count / maxSector) * 100}%`, background: `linear-gradient(90deg, ${VIOLET}, ${VIOLET_DARK})` }}
                       />
                     </div>
                   </div>
@@ -264,14 +256,86 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Separator */}
-            <div style={{ borderTop: `1px solid ${BORDER}`, marginBottom: "32px" }} />
+            {/* Leads chauds */}
+            {hotLeads.length > 0 && (
+              <>
+                <div style={{ borderTop: `1px solid ${BORDER}` }} />
+                <div>
+                  <p className="text-xs font-semibold tracking-widest uppercase mb-4 flex items-center gap-1.5" style={{ color: GRAY }}>
+                    <Flame size={12} style={{ color: "#ef4444" }} />
+                    Leads chauds
+                  </p>
+                  <div className="space-y-1">
+                    {hotLeads.map(lead => (
+                      <button
+                        key={lead.id}
+                        onClick={() => setLocation(`/leads/${lead.id}`)}
+                        className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all group text-left"
+                        style={{ color: DARK }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(239,68,68,0.06)"; }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
+                      >
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium truncate" style={{ color: DARK }}>{lead.name}</p>
+                          <p className="text-xs capitalize" style={{ color: GRAY }}>{lead.sector} · {lead.status}</p>
+                        </div>
+                        <ArrowUpRight size={13} className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0" style={{ color: "#ef4444" }} />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* Activité récente */}
+            {recentInteractions.length > 0 && (
+              <>
+                <div style={{ borderTop: `1px solid ${BORDER}` }} />
+                <div>
+                  <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: GRAY }}>
+                    Activité récente
+                  </p>
+                  <div className="space-y-2.5">
+                    {recentInteractions.slice(0, 6).map((inter: any) => {
+                      const typeIcon: Record<string, React.ReactNode> = {
+                        appel:   <PhoneCall size={11} />,
+                        visite:  <Car size={11} />,
+                        email:   <Mail size={11} />,
+                        message: <MessageCircle size={11} />,
+                        autre:   <FileText size={11} />,
+                      };
+                      const outcomeColor: Record<string, string> = {
+                        positif: "#16a34a",
+                        neutre:  GRAY,
+                        "négatif": "#ef4444",
+                      };
+                      return (
+                        <div key={inter.id} className="flex items-start gap-2.5">
+                          <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5" style={{ background: "rgba(139,92,246,0.1)", color: VIOLET }}>
+                            {typeIcon[inter.type] ?? <FileText size={11} />}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-medium truncate" style={{ color: DARK }}>
+                              {inter.leadName}
+                            </p>
+                            {inter.notes && (
+                              <p className="text-xs truncate" style={{ color: GRAY }}>{inter.notes}</p>
+                            )}
+                          </div>
+                          {inter.outcome && (
+                            <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ background: outcomeColor[inter.outcome] ?? GRAY }} />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
+            )}
 
             {/* Quick links */}
-            <div>
-              <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: GRAY }}>
-                Accès rapide
-              </p>
+            <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: "24px" }}>
+              <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: GRAY }}>Accès rapide</p>
               <div className="space-y-1">
                 {[
                   { label: "Mes leads", path: "/leads", icon: Users },
@@ -280,24 +344,16 @@ export default function Dashboard() {
                   <button
                     key={path}
                     onClick={() => setLocation(path)}
-                    className="w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium transition-all group"
+                    className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all group"
                     style={{ color: DARK }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "rgba(139,92,246,0.08)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "transparent";
-                    }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(139,92,246,0.08)"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
                   >
                     <div className="flex items-center gap-2.5">
                       <Icon size={15} style={{ color: VIOLET }} />
                       {label}
                     </div>
-                    <ArrowUpRight
-                      size={13}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity"
-                      style={{ color: VIOLET }}
-                    />
+                    <ArrowUpRight size={13} className="opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: VIOLET }} />
                   </button>
                 ))}
               </div>

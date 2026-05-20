@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
-import { getLeadsByUser, getLeadById, createLead, updateLead, deleteLead, getInteractionsByLead, createInteraction, deleteInteraction, getAppointmentsByLead, createAppointment, updateAppointment, deleteAppointment, getProspectsPotentiels, getProspectPotentielById, createProspectPotentiel, updateProspectPotentiel, deleteProspectPotentiel, convertProspectToLead, bulkInsertProspects } from "./db";
+import { getLeadsByUser, getLeadById, createLead, updateLead, deleteLead, getInteractionsByLead, createInteraction, deleteInteraction, getAppointmentsByLead, createAppointment, updateAppointment, deleteAppointment, getProspectsPotentiels, getProspectPotentielById, createProspectPotentiel, updateProspectPotentiel, deleteProspectPotentiel, convertProspectToLead, bulkInsertProspects, getSalesScripts, createSalesScript, updateSalesScript, deleteSalesScript, getDiagnosticsByLead, createDiagnostic, getRecentInteractionsByUser, getMessageTemplates, createMessageTemplate, updateMessageTemplate, deleteMessageTemplate } from "./db";
 import { geocodingRouter } from "./routers/geocoding";
 
 export const appRouter = router({
@@ -114,7 +114,16 @@ export const appRouter = router({
       .query(({ input }) => {
         return getInteractionsByLead(input);
       }),
-    
+
+    recent: protectedProcedure
+      .input((val: unknown) => {
+        const v = val as any;
+        return typeof v?.limit === 'number' ? v.limit : 20;
+      })
+      .query(({ ctx, input }) => {
+        return getRecentInteractionsByUser(ctx.user.id, input);
+      }),
+
     create: protectedProcedure
       .input((val: unknown) => val as any)
       .mutation(({ ctx, input }) => {
@@ -122,6 +131,96 @@ export const appRouter = router({
           ...input,
           userId: ctx.user.id,
         });
+      }),
+
+    delete: protectedProcedure
+      .input((val: unknown) => {
+        if (typeof val === 'object' && val !== null && 'id' in val && typeof (val as any).id === 'number') {
+          return (val as { id: number }).id;
+        }
+        throw new Error('Invalid input');
+      })
+      .mutation(({ input }) => {
+        return deleteInteraction(input);
+      }),
+  }),
+
+  diagnostics: router({
+    list: protectedProcedure
+      .input((val: unknown) => {
+        if (typeof val === 'object' && val !== null && 'leadId' in val && typeof (val as any).leadId === 'number') {
+          return (val as { leadId: number }).leadId;
+        }
+        throw new Error('Invalid input');
+      })
+      .query(({ input }) => {
+        return getDiagnosticsByLead(input);
+      }),
+
+    create: protectedProcedure
+      .input((val: unknown) => val as any)
+      .mutation(({ input }) => {
+        return createDiagnostic(input);
+      }),
+  }),
+
+  messageTemplates: router({
+    list: protectedProcedure.query(() => {
+      return getMessageTemplates();
+    }),
+
+    create: protectedProcedure
+      .input((val: unknown) => val as any)
+      .mutation(({ input }) => {
+        return createMessageTemplate(input);
+      }),
+
+    update: protectedProcedure
+      .input((val: unknown) => val as any)
+      .mutation(({ input }) => {
+        const { id, ...updates } = input;
+        return updateMessageTemplate(id, updates);
+      }),
+
+    delete: protectedProcedure
+      .input((val: unknown) => {
+        if (typeof val === 'object' && val !== null && 'id' in val && typeof (val as any).id === 'number') {
+          return (val as { id: number }).id;
+        }
+        throw new Error('Invalid input');
+      })
+      .mutation(({ input }) => {
+        return deleteMessageTemplate(input);
+      }),
+  }),
+
+  salesScripts: router({
+    list: protectedProcedure.query(() => {
+      return getSalesScripts();
+    }),
+
+    create: protectedProcedure
+      .input((val: unknown) => val as any)
+      .mutation(({ input }) => {
+        return createSalesScript(input);
+      }),
+
+    update: protectedProcedure
+      .input((val: unknown) => val as any)
+      .mutation(({ input }) => {
+        const { id, ...updates } = input;
+        return updateSalesScript(id, updates);
+      }),
+
+    delete: protectedProcedure
+      .input((val: unknown) => {
+        if (typeof val === 'object' && val !== null && 'id' in val && typeof (val as any).id === 'number') {
+          return (val as { id: number }).id;
+        }
+        throw new Error('Invalid input');
+      })
+      .mutation(({ input }) => {
+        return deleteSalesScript(input);
       }),
   }),
 

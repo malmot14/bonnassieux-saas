@@ -1,285 +1,381 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Phone, Image, BookOpen, Copy, Search } from "lucide-react";
-import { toast } from "sonner";
 import { useState, useMemo } from "react";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+import { Phone, Mail, MessageSquare, BookOpen, Copy, Plus, Pencil, Trash2, ChevronDown, ChevronUp, Search } from "lucide-react";
 
-const phoneScripts = {
-  artisans: {
-    title: "Script pour Artisans",
-    content: `"Bonjour [Prénom], c'est [Votre Nom] de Bonnassieux Agency. Je vous appelle parce que j'ai remarqué que votre présence en ligne pourrait être nettement améliorée. Vous avez 30 secondes ?
+const SECTORS = ["artisans", "restaurants", "sport/bien-être", "BTP"] as const;
 
-Votre travail est excellent, mais peu de gens le savent. On peut transformer ça en clients concrets en 2-3 semaines. Vous avez 10 minutes jeudi ou vendredi pour en parler ?"`,
-  },
-  restaurants: {
-    title: "Script pour Restaurants",
-    content: `"Bonjour [Prénom], c'est [Votre Nom] de Bonnassieux Agency. Je vous appelle parce que j'ai remarqué que votre présence en ligne pourrait être nettement améliorée. Vous avez 30 secondes ?
+// ─── Phone Scripts (DB-backed via salesScripts) ───────────────────────────────
 
-Votre restaurant a une excellente réputation, mais vous perdez des clients qui ne vous trouvent pas en ligne. On peut changer ça rapidement. Ça vous intéresse ?"`,
-  },
-  btp: {
-    title: "Script pour BTP",
-    content: `"Bonjour [Prénom], c'est [Votre Nom] de Bonnassieux Agency. Je vous appelle parce que j'ai remarqué que votre présence en ligne pourrait être nettement améliorée. Vous avez 30 secondes ?
+function PhoneScriptsTab() {
+  const { data: scripts = [], isLoading, refetch } = trpc.salesScripts.list.useQuery();
+  const createMut = trpc.salesScripts.create.useMutation({ onSuccess: () => { refetch(); toast.success("Script créé"); setModalOpen(false); }, onError: () => toast.error("Erreur") });
+  const updateMut = trpc.salesScripts.update.useMutation({ onSuccess: () => { refetch(); toast.success("Script mis à jour"); setModalOpen(false); }, onError: () => toast.error("Erreur") });
+  const deleteMut = trpc.salesScripts.delete.useMutation({ onSuccess: () => { refetch(); toast.success("Supprimé"); setDeleteId(null); }, onError: () => toast.error("Erreur") });
 
-Vous perdez des chantiers parce que vous n'êtes pas visible en ligne. On peut changer ça rapidement. Ça vous intéresse ?"`,
-  },
-  coaching: {
-    title: "Script pour Coaching Mental",
-    content: `"Bonjour [Prénom], c'est [Votre Nom] de Bonnassieux Agency. Je vous appelle parce que j'ai remarqué une opportunité pour vous. Vous avez 30 secondes ?
+  const [search, setSearch] = useState("");
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editing, setEditing] = useState<any>(null);
+  const [form, setForm] = useState({ sector: "artisans" as any, title: "", content: "" });
+  const [deleteId, setDeleteId] = useState<number | null>(null);
 
-Les athlètes et structures sportives cherchent des coachs mentaux. On peut vous mettre en face de ces prospects qualifiés. Vous avez 15 min pour discuter ?"`,
-  },
-};
-
-const presentationImages = [
-  {
-    title: "Le Problème",
-    description: "Montre la situation actuelle (site obsolète, pas de visibilité)",
-    url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663604329874/B3pH6shsDLwQYFDivWqoEG/bonnassieux_crm_slide_1_problem-3ovwJgUTcsM6DnTWtaDpWd.webp",
-  },
-  {
-    title: "La Solution",
-    description: "Affiche le CRM Bonnassieux avec les résultats réels",
-    url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663604329874/B3pH6shsDLwQYFDivWqoEG/bonnassieux_crm_slide_2_solution-NhAhX6wKUczcbxGo5waFsu.webp",
-  },
-  {
-    title: "Vos Bénéfices",
-    description: "4 bénéfices clés avec chiffres concrets",
-    url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663604329874/B3pH6shsDLwQYFDivWqoEG/bonnassieux_crm_slide_3_benefits-iHPH4vMQhHbH3UhNQ2Axxf.webp",
-  },
-  {
-    title: "Comment ça marche",
-    description: "Les 3 étapes (Diagnostic → Stratégie → Résultats)",
-    url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663604329874/B3pH6shsDLwQYFDivWqoEG/bonnassieux_crm_slide_4_process-mkHueZLyy2YP3sAnf39xGT.webp",
-  },
-  {
-    title: "Appel à l'Action",
-    description: "Slide de fermeture avec CTA fort",
-    url: "https://d2xsxph8kpxj0f.cloudfront.net/310519663604329874/B3pH6shsDLwQYFDivWqoEG/bonnassieux_crm_slide_5_cta-GYXChMsQS7n5yoZ675RxWP.webp",
-  },
-];
-
-export default function CommunicationTools() {
-  const [copiedScript, setCopiedScript] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const filteredScripts = useMemo(() => {
-    return Object.entries(phoneScripts).filter(([key, script]) =>
-      key.toLowerCase().includes(searchTerm) ||
-      script.title.toLowerCase().includes(searchTerm) ||
-      script.content.toLowerCase().includes(searchTerm)
+  const filtered = useMemo(() => {
+    const q = search.toLowerCase();
+    return (scripts as any[]).filter(s =>
+      s.title.toLowerCase().includes(q) ||
+      s.content.toLowerCase().includes(q) ||
+      s.sector.toLowerCase().includes(q)
     );
-  }, [searchTerm]);
+  }, [scripts, search]);
 
-  const copyToClipboard = (text: string, scriptName: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedScript(scriptName);
-    toast.success("Script copié dans le presse-papiers !");
-    setTimeout(() => setCopiedScript(null), 2000);
+  const copy = (script: any) => {
+    navigator.clipboard.writeText(script.content);
+    setCopiedId(script.id);
+    toast.success("Script copié !");
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const openCreate = () => { setEditing(null); setForm({ sector: "artisans", title: "", content: "" }); setModalOpen(true); };
+  const openEdit = (s: any) => { setEditing(s); setForm({ sector: s.sector, title: s.title, content: s.content }); setModalOpen(true); };
+  const submit = () => {
+    if (!form.title.trim() || !form.content.trim()) { toast.error("Titre et contenu requis"); return; }
+    if (editing) updateMut.mutate({ id: editing.id, ...form });
+    else createMut.mutate(form);
   };
 
   return (
-    <div className="p-8 bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
-      <div className="max-w-6xl mx-auto">
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        <div className="relative flex-1 max-w-sm">
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Input placeholder="Rechercher…" value={search} onChange={e => setSearch(e.target.value)} className="pl-8 h-9" />
+        </div>
+        <Button size="sm" onClick={openCreate} className="gap-1.5 h-9">
+          <Plus size={14} /> Nouveau
+        </Button>
+      </div>
+
+      {isLoading && <p className="text-sm text-slate-400 py-8 text-center">Chargement…</p>}
+      {!isLoading && filtered.length === 0 && (
+        <p className="text-sm text-slate-400 py-8 text-center">Aucun script.</p>
+      )}
+
+      <div className="space-y-2">
+        {filtered.map((script: any) => (
+          <div key={script.id} className="border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <div className="flex items-center gap-2 px-4 py-3">
+              <button className="flex-1 text-left flex items-center gap-2 min-w-0" onClick={() => setExpandedId(expandedId === script.id ? null : script.id)}>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 shrink-0 capitalize">{script.sector}</span>
+                <span className="font-medium text-slate-800 text-sm truncate">{script.title}</span>
+              </button>
+              <div className="flex items-center gap-1 shrink-0">
+                <button onClick={() => copy(script)} className={`p-1.5 text-xs transition-colors ${copiedId === script.id ? "text-green-600" : "text-slate-400 hover:text-slate-700"}`}>
+                  <Copy size={13} />
+                </button>
+                <button onClick={() => setExpandedId(expandedId === script.id ? null : script.id)} className="p-1.5 text-slate-400 hover:text-slate-600">
+                  {expandedId === script.id ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                </button>
+                <button onClick={() => openEdit(script)} className="p-1.5 text-slate-400 hover:text-slate-700"><Pencil size={13} /></button>
+                <button onClick={() => setDeleteId(script.id)} className="p-1.5 text-slate-400 hover:text-red-500"><Trash2 size={13} /></button>
+              </div>
+            </div>
+            {expandedId === script.id && (
+              <div className="px-4 pb-4 border-t border-slate-100">
+                <pre className="mt-3 text-sm text-slate-700 whitespace-pre-wrap font-sans leading-relaxed">{script.content}</pre>
+                <Button size="sm" variant={copiedId === script.id ? "default" : "outline"} className="mt-3 gap-1.5" onClick={() => copy(script)}>
+                  <Copy size={13} />{copiedId === script.id ? "Copié !" : "Copier"}
+                </Button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Guide conseil */}
+      <div className="mt-6 p-4 rounded-xl border-l-4 border-slate-700 bg-slate-50 text-sm text-slate-700">
+        <p className="font-semibold mb-1">Timing idéal</p>
+        <p className="text-xs text-slate-500">30-40 sec pour l'accroche. Parlez lentement, utilisez le prénom. Proposez 2 créneaux précis pour le RDV.</p>
+      </div>
+
+      {/* Modal create/edit */}
+      <Dialog open={modalOpen} onOpenChange={open => { if (!open) setModalOpen(false); }}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader><DialogTitle>{editing ? "Modifier le script" : "Nouveau script"}</DialogTitle></DialogHeader>
+          <div className="space-y-4 py-2">
+            <div>
+              <label className="text-xs font-medium text-slate-600 mb-1.5 block">Secteur</label>
+              <Select value={form.sector} onValueChange={v => setForm(f => ({ ...f, sector: v }))}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>{SECTORS.map(s => <SelectItem key={s} value={s} className="capitalize">{s}</SelectItem>)}</SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="text-xs font-medium text-slate-600 mb-1.5 block">Titre</label>
+              <Input value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-slate-600 mb-1.5 block">Contenu</label>
+              <Textarea value={form.content} onChange={e => setForm(f => ({ ...f, content: e.target.value }))} rows={7} className="font-mono text-sm resize-none" />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setModalOpen(false)}>Annuler</Button>
+            <Button onClick={submit} disabled={createMut.isPending || updateMut.isPending}>{editing ? "Enregistrer" : "Créer"}</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <AlertDialog open={deleteId !== null} onOpenChange={open => { if (!open) setDeleteId(null); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader><AlertDialogTitle>Supprimer ce script ?</AlertDialogTitle><AlertDialogDescription>Action irréversible.</AlertDialogDescription></AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Annuler</AlertDialogCancel>
+            <AlertDialogAction className="bg-red-600 hover:bg-red-700" onClick={() => deleteId !== null && deleteMut.mutate({ id: deleteId })}>Supprimer</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </div>
+  );
+}
+
+// ─── Message Templates (email / WhatsApp) ─────────────────────────────────────
+
+function TemplatesTab({ type }: { type: "email" | "whatsapp" }) {
+  const { data: allTemplates = [], isLoading, refetch } = trpc.messageTemplates.list.useQuery();
+  const createMut = trpc.messageTemplates.create.useMutation({ onSuccess: () => { refetch(); toast.success("Template créé"); setModalOpen(false); }, onError: () => toast.error("Erreur") });
+  const updateMut = trpc.messageTemplates.update.useMutation({ onSuccess: () => { refetch(); toast.success("Mis à jour"); setModalOpen(false); }, onError: () => toast.error("Erreur") });
+  const deleteMut = trpc.messageTemplates.delete.useMutation({ onSuccess: () => { refetch(); toast.success("Supprimé"); setDeleteId(null); }, onError: () => toast.error("Erreur") });
+
+  const templates = useMemo(() => (allTemplates as any[]).filter(t => t.type === type), [allTemplates, type]);
+
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editing, setEditing] = useState<any>(null);
+  const [form, setForm] = useState({ sector: "artisans", subject: "", content: "" });
+  const [deleteId, setDeleteId] = useState<number | null>(null);
+
+  const copy = (t: any) => {
+    const text = type === "email" && t.subject ? `Objet : ${t.subject}\n\n${t.content}` : t.content;
+    navigator.clipboard.writeText(text);
+    setCopiedId(t.id);
+    toast.success("Copié !");
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const openCreate = () => { setEditing(null); setForm({ sector: "artisans", subject: "", content: "" }); setModalOpen(true); };
+  const openEdit = (t: any) => { setEditing(t); setForm({ sector: t.sector, subject: t.subject ?? "", content: t.content }); setModalOpen(true); };
+  const submit = () => {
+    if (!form.content.trim()) { toast.error("Contenu requis"); return; }
+    const payload = { type, sector: form.sector, content: form.content, ...(type === "email" ? { subject: form.subject } : {}) };
+    if (editing) updateMut.mutate({ id: editing.id, ...payload });
+    else createMut.mutate(payload);
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex justify-end">
+        <Button size="sm" onClick={openCreate} className="gap-1.5 h-9">
+          <Plus size={14} /> Nouveau template
+        </Button>
+      </div>
+
+      {isLoading && <p className="text-sm text-slate-400 py-8 text-center">Chargement…</p>}
+      {!isLoading && templates.length === 0 && (
+        <p className="text-sm text-slate-400 py-8 text-center">Aucun template {type}.</p>
+      )}
+
+      <div className="space-y-2">
+        {templates.map((t: any) => (
+          <div key={t.id} className="border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <div className="flex items-center gap-2 px-4 py-3">
+              <button className="flex-1 text-left flex items-center gap-2 min-w-0" onClick={() => setExpandedId(expandedId === t.id ? null : t.id)}>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 shrink-0 capitalize">{t.sector}</span>
+                <span className="font-medium text-slate-800 text-sm truncate">{t.subject || t.content.slice(0, 60) + "…"}</span>
+              </button>
+              <div className="flex items-center gap-1 shrink-0">
+                <button onClick={() => copy(t)} className={`p-1.5 transition-colors ${copiedId === t.id ? "text-green-600" : "text-slate-400 hover:text-slate-700"}`}><Copy size={13} /></button>
+                <button onClick={() => setExpandedId(expandedId === t.id ? null : t.id)} className="p-1.5 text-slate-400 hover:text-slate-600">
+                  {expandedId === t.id ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                </button>
+                <button onClick={() => openEdit(t)} className="p-1.5 text-slate-400 hover:text-slate-700"><Pencil size={13} /></button>
+                <button onClick={() => setDeleteId(t.id)} className="p-1.5 text-slate-400 hover:text-red-500"><Trash2 size={13} /></button>
+              </div>
+            </div>
+            {expandedId === t.id && (
+              <div className="px-4 pb-4 border-t border-slate-100">
+                {t.subject && (
+                  <p className="mt-3 text-xs font-medium text-slate-500">
+                    Objet : <span className="text-slate-800">{t.subject}</span>
+                  </p>
+                )}
+                <pre className="mt-2 text-sm text-slate-700 whitespace-pre-wrap font-sans leading-relaxed">{t.content}</pre>
+                <Button size="sm" variant={copiedId === t.id ? "default" : "outline"} className="mt-3 gap-1.5" onClick={() => copy(t)}>
+                  <Copy size={13} />{copiedId === t.id ? "Copié !" : "Copier"}
+                </Button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Modal */}
+      <Dialog open={modalOpen} onOpenChange={open => { if (!open) setModalOpen(false); }}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader><DialogTitle>{editing ? "Modifier le template" : `Nouveau template ${type}`}</DialogTitle></DialogHeader>
+          <div className="space-y-4 py-2">
+            <div>
+              <label className="text-xs font-medium text-slate-600 mb-1.5 block">Secteur</label>
+              <Select value={form.sector} onValueChange={v => setForm(f => ({ ...f, sector: v }))}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>{SECTORS.map(s => <SelectItem key={s} value={s} className="capitalize">{s}</SelectItem>)}</SelectContent>
+              </Select>
+            </div>
+            {type === "email" && (
+              <div>
+                <label className="text-xs font-medium text-slate-600 mb-1.5 block">Objet de l'email</label>
+                <Input placeholder="Objet…" value={form.subject} onChange={e => setForm(f => ({ ...f, subject: e.target.value }))} />
+              </div>
+            )}
+            <div>
+              <label className="text-xs font-medium text-slate-600 mb-1.5 block">Contenu</label>
+              <Textarea value={form.content} onChange={e => setForm(f => ({ ...f, content: e.target.value }))} rows={8} className="font-mono text-sm resize-none" placeholder="Bonjour [Prénom],…" />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setModalOpen(false)}>Annuler</Button>
+            <Button onClick={submit} disabled={createMut.isPending || updateMut.isPending}>{editing ? "Enregistrer" : "Créer"}</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <AlertDialog open={deleteId !== null} onOpenChange={open => { if (!open) setDeleteId(null); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader><AlertDialogTitle>Supprimer ce template ?</AlertDialogTitle><AlertDialogDescription>Action irréversible.</AlertDialogDescription></AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Annuler</AlertDialogCancel>
+            <AlertDialogAction className="bg-red-600 hover:bg-red-700" onClick={() => deleteId !== null && deleteMut.mutate({ id: deleteId })}>Supprimer</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </div>
+  );
+}
+
+// ─── Page principale ───────────────────────────────────────────────────────────
+
+export default function CommunicationTools() {
+  return (
+    <div className="p-8 min-h-[100dvh] bg-slate-50">
+      <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">Outils de Communication</h1>
-          <p className="text-slate-600">
-            Tous les scripts et visuels pour réussir vos appels et RDV commerciaux
-          </p>
+          <h1 className="text-3xl font-semibold text-slate-900 tracking-tight mb-1">Outils de Communication</h1>
+          <p className="text-slate-500 text-sm">Scripts téléphoniques, templates email et WhatsApp — tout en un.</p>
         </div>
 
-        <Tabs defaultValue="scripts" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="scripts" className="flex items-center gap-2">
-              <Phone size={18} />
-              Scripts Téléphoniques
+        <Tabs defaultValue="scripts">
+          <TabsList className="mb-6">
+            <TabsTrigger value="scripts" className="gap-2">
+              <Phone size={14} /> Scripts téléphoniques
             </TabsTrigger>
-            <TabsTrigger value="images" className="flex items-center gap-2">
-              <Image size={18} />
-              Visuels RDV
+            <TabsTrigger value="email" className="gap-2">
+              <Mail size={14} /> Templates email
             </TabsTrigger>
-            <TabsTrigger value="guide" className="flex items-center gap-2">
-              <BookOpen size={18} />
-              Guide Complet
+            <TabsTrigger value="whatsapp" className="gap-2">
+              <MessageSquare size={14} /> Templates WhatsApp
+            </TabsTrigger>
+            <TabsTrigger value="guide" className="gap-2">
+              <BookOpen size={14} /> Guide RDV
             </TabsTrigger>
           </TabsList>
 
-          {/* SCRIPTS TÉLÉPHONIQUES */}
-          <TabsContent value="scripts" className="space-y-4">
-            <div className="mb-4">
-              <div className="flex items-center gap-2 max-w-md">
-                <Search size={18} className="text-slate-400" />
-                <Input
-                  placeholder="Rechercher un script (ex: artisans, restaurants)..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
-                  className="flex-1"
-                />
-              </div>
-            </div>
+          <TabsContent value="scripts"><PhoneScriptsTab /></TabsContent>
+          <TabsContent value="email"><TemplatesTab type="email" /></TabsContent>
+          <TabsContent value="whatsapp"><TemplatesTab type="whatsapp" /></TabsContent>
 
-            {filteredScripts.length === 0 ? (
-              <div className="col-span-full text-center py-8 text-slate-500">
-                <p>Aucun script ne correspond à votre recherche.</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {filteredScripts.map(([key, script]) => (
-                  <Card key={key} className="border-0 shadow-md hover:shadow-lg transition-shadow">
-                    <CardHeader>
-                      <CardTitle className="text-lg">{script.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                        <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap">
-                          {script.content}
-                        </p>
+          <TabsContent value="guide">
+            <div className="space-y-6 text-sm text-slate-700">
+              <section className="border border-slate-200 rounded-xl p-6 bg-white">
+                <h2 className="font-semibold text-slate-900 mb-4">Structure de la présentation (15-20 min)</h2>
+                <ol className="space-y-2.5">
+                  {[
+                    ["Slide 1 — Le Problème", "2-3 min", "Identifiez la situation du prospect"],
+                    ["Slide 2 — La Solution",  "3-4 min", "Montrez le CRM et les résultats"],
+                    ["Slide 3 — Vos Bénéfices","3-4 min", "Chiffres concrets : visibilité, leads, conversions"],
+                    ["Slide 4 — Comment ça marche","3-4 min","Diagnostic → Stratégie → Résultats"],
+                    ["Slide 5 — Appel à l'Action","2-3 min","Proposez le diagnostic gratuit"],
+                  ].map(([title, duration, desc]) => (
+                    <li key={title} className="flex items-start gap-3">
+                      <span className="text-xs font-medium text-slate-400 mt-0.5 shrink-0 w-14">{duration}</span>
+                      <div>
+                        <p className="font-medium text-slate-800">{title}</p>
+                        <p className="text-xs text-slate-500">{desc}</p>
                       </div>
-                      <Button
-                        onClick={() => copyToClipboard(script.content, key)}
-                        variant={copiedScript === key ? "default" : "outline"}
-                        className="w-full flex items-center gap-2"
-                      >
-                        <Copy size={18} />
-                        {copiedScript === key ? "Copié !" : "Copier le script"}
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
+                    </li>
+                  ))}
+                </ol>
+              </section>
+
+              <div className="grid grid-cols-2 gap-4">
+                <section className="border border-slate-200 rounded-xl p-5 bg-white">
+                  <h2 className="font-semibold text-slate-900 mb-3">À faire</h2>
+                  <ul className="space-y-1.5 text-xs text-slate-600">
+                    {["Montrer les visuels sur téléphone ou tablette","Maintenir le contact visuel","Parler lentement et clairement","S'asseoir à côté du prospect","Respecter le timing (15-20 min)","Prendre des notes pendant l'échange"].map(t => (
+                      <li key={t} className="flex items-start gap-1.5"><span className="text-green-500 shrink-0">✓</span>{t}</li>
+                    ))}
+                  </ul>
+                </section>
+                <section className="border border-slate-200 rounded-xl p-5 bg-white">
+                  <h2 className="font-semibold text-slate-900 mb-3">À éviter</h2>
+                  <ul className="space-y-1.5 text-xs text-slate-600">
+                    {["Lire les slides mot à mot","Parler trop vite","Utiliser du jargon technique","Rester debout","Dépasser 20 minutes","Faire pression pour une décision immédiate"].map(t => (
+                      <li key={t} className="flex items-start gap-1.5"><span className="text-red-400 shrink-0">✗</span>{t}</li>
+                    ))}
+                  </ul>
+                </section>
               </div>
-            )}
 
-            <Card className="border-0 shadow-md bg-blue-50 border-l-4 border-blue-600">
-              <CardHeader>
-                <CardTitle className="text-base text-blue-900">💡 Conseil</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-blue-800">
-                <p>
-                  <strong>Timing idéal :</strong> 30-40 secondes pour l'accroche. Parlez lentement et clairement.
-                  Utilisez le prénom du prospect. Proposez 2 créneaux précis pour le RDV.
-                </p>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* VISUELS RDV */}
-          <TabsContent value="images" className="space-y-6">
-            <div className="grid grid-cols-1 gap-6">
-              {presentationImages.map((image, index) => (
-                <Card key={index} className="border-0 shadow-md overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 pb-3">
-                    <CardTitle className="text-lg">{image.title}</CardTitle>
-                    <p className="text-sm text-slate-600 mt-1">{image.description}</p>
-                  </CardHeader>
-                  <CardContent className="p-0">
-                    <img
-                      src={image.url}
-                      alt={image.title}
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <Card className="border-0 shadow-md bg-green-50 border-l-4 border-green-600">
-              <CardHeader>
-                <CardTitle className="text-base text-green-900">💡 Conseil</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-green-800">
-                <p>
-                  <strong>Astuce :</strong> Montrez les images sur votre téléphone ou tablette en RDV. C'est plus
-                  intime et professionnel. Respectez le timing : 15-20 minutes max pour la présentation complète.
-                </p>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* GUIDE COMPLET */}
-          <TabsContent value="guide" className="space-y-4">
-            <Card className="border-0 shadow-md">
-              <CardHeader>
-                <CardTitle>Guide Complet de Présentation</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
+              <section className="border border-slate-200 rounded-xl p-6 bg-white">
+                <h2 className="font-semibold text-slate-900 mb-4">Gestion des objections</h2>
                 <div className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold text-slate-900 mb-2">📞 Structure de la Présentation</h3>
-                    <ul className="space-y-2 text-sm text-slate-700">
-                      <li>✅ <strong>Slide 1 - Le Problème</strong> (2-3 min) : Identifiez la situation du prospect</li>
-                      <li>✅ <strong>Slide 2 - La Solution</strong> (3-4 min) : Montrez le CRM et les résultats</li>
-                      <li>✅ <strong>Slide 3 - Vos Bénéfices</strong> (3-4 min) : Chiffres concrets (visibilité, leads, conversions, revenus)</li>
-                      <li>✅ <strong>Slide 4 - Comment ça marche</strong> (3-4 min) : Les 3 étapes (Diagnostic → Stratégie → Résultats)</li>
-                      <li>✅ <strong>Slide 5 - Appel à l'Action</strong> (2-3 min) : Proposez le diagnostic gratuit</li>
-                    </ul>
-                  </div>
-
-                  <div className="border-t pt-4">
-                    <h3 className="font-semibold text-slate-900 mb-2">✅ À FAIRE</h3>
-                    <ul className="space-y-1 text-sm text-slate-700">
-                      <li>📱 Montrer les images sur votre téléphone ou tablette</li>
-                      <li>👁️ Maintenir le contact visuel</li>
-                      <li>💬 Parler lentement et clairement</li>
-                      <li>🤝 Vous asseoir à côté du prospect, pas face à face</li>
-                      <li>⏰ Respecter le timing (15-20 min max)</li>
-                      <li>📝 Prendre des notes pendant qu'il parle</li>
-                    </ul>
-                  </div>
-
-                  <div className="border-t pt-4">
-                    <h3 className="font-semibold text-slate-900 mb-2">❌ À ÉVITER</h3>
-                    <ul className="space-y-1 text-sm text-slate-700">
-                      <li>🚫 Lire les slides mot à mot</li>
-                      <li>🚫 Parler trop vite</li>
-                      <li>🚫 Utiliser du jargon technique</li>
-                      <li>🚫 Rester debout (moins convivial)</li>
-                      <li>🚫 Dépasser 20 minutes</li>
-                      <li>🚫 Faire pression pour une décision immédiate</li>
-                    </ul>
-                  </div>
-
-                  <div className="border-t pt-4">
-                    <h3 className="font-semibold text-slate-900 mb-2">🎯 Gestion des Objections</h3>
-                    <div className="space-y-3 text-sm">
-                      <div>
-                        <p className="font-medium text-slate-800">"C'est trop cher"</p>
-                        <p className="text-slate-600">
-                          "Je comprends. Mais regardez : vous investissez 500€/mois et vous gagnez 150k€ de CA supplémentaire. C'est un ROI de 300x."
-                        </p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-slate-800">"Je n'ai pas le temps"</p>
-                        <p className="text-slate-600">
-                          "Justement. Notre outil vous en fait gagner. Vous gérez tout depuis votre téléphone. 10 min par jour max."
-                        </p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-slate-800">"Je vais réfléchir"</p>
-                        <p className="text-slate-600">
-                          "Bien sûr. Mais pendant que vous réfléchissez, vos concurrents agissent. Pourquoi pas un diagnostic gratuit jeudi ?"
-                        </p>
-                      </div>
+                  {[
+                    ["\"C'est trop cher\"", "Je comprends. Mais 500€/mois pour 150k€ de CA supplémentaire, c'est un ROI de 300x."],
+                    ["\"Je n'ai pas le temps\"", "Justement — notre outil vous en fait gagner. 10 min par jour max depuis votre téléphone."],
+                    ["\"Je vais réfléchir\"", "Pendant que vous réfléchissez, vos concurrents agissent. Pourquoi pas un diagnostic gratuit jeudi ?"],
+                  ].map(([obj, rep]) => (
+                    <div key={obj} className="border-l-2 border-slate-200 pl-4">
+                      <p className="font-medium text-slate-800 text-xs mb-1">{obj}</p>
+                      <p className="text-xs text-slate-500">{rep}</p>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              </CardContent>
-            </Card>
+              </section>
 
-            <Card className="border-0 shadow-md bg-purple-50 border-l-4 border-purple-600">
-              <CardHeader>
-                <CardTitle className="text-base text-purple-900">📊 Taux de Succès Cible</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-purple-800">
-                <ul className="space-y-1">
-                  <li>📞 <strong>Taux de réponse :</strong> 30-40%</li>
-                  <li>📅 <strong>Taux de RDV pris :</strong> 50-60% des appels réussis</li>
-                  <li>✅ <strong>Taux de conversion RDV :</strong> 50%+ en clients</li>
-                </ul>
-              </CardContent>
-            </Card>
+              <section className="border border-slate-200 rounded-xl p-5 bg-white">
+                <h2 className="font-semibold text-slate-900 mb-3">Taux de succès cible</h2>
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  {[
+                    ["30-40%", "Taux de réponse"],
+                    ["50-60%", "Taux de RDV pris"],
+                    ["50%+",   "Conversion RDV → client"],
+                  ].map(([val, label]) => (
+                    <div key={label}>
+                      <div className="text-xl font-bold text-slate-900 tabular-nums">{val}</div>
+                      <div className="text-xs text-slate-400 mt-0.5">{label}</div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </div>
           </TabsContent>
         </Tabs>
       </div>

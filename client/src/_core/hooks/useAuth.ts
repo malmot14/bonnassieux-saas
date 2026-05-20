@@ -1,23 +1,23 @@
-import { useCallback } from "react";
-
-// AUTH BYPASS — à remplacer par la vraie auth quand le .env sera configuré
-const DEV_USER = {
-  id: 1,
-  name: "Admin Bonnassieux",
-  email: "admin@bonnassieux.fr",
-  role: "admin" as const,
-};
+import { trpc } from "@/lib/trpc";
+import { useLocation } from "wouter";
 
 export function useAuth(_options?: { redirectOnUnauthenticated?: boolean; redirectPath?: string }) {
-  const logout = useCallback(async () => {
-    // no-op en mode bypass
-  }, []);
+  const [, setLocation] = useLocation();
+  const { data: user, isLoading } = trpc.auth.me.useQuery(undefined, { retry: false });
+
+  const logoutMutation = trpc.auth.logout.useMutation({
+    onSuccess: () => {
+      setLocation("/login");
+    },
+  });
+
+  const logout = () => logoutMutation.mutate();
 
   return {
-    user: DEV_USER,
-    loading: false,
+    user: user ?? null,
+    loading: isLoading,
     error: null,
-    isAuthenticated: true,
+    isAuthenticated: !!user,
     refresh: () => {},
     logout,
   };

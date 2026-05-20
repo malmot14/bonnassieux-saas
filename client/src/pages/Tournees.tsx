@@ -55,6 +55,11 @@ function markerColor(status: string) {
   return STATUS_COLOR[status] ?? "#6b7280";
 }
 
+function pinColor(lead: Lead): string {
+  if (lead.priority === "haute") return "#7c3aed"; // violet — haute priorité
+  return STATUS_COLOR[lead.status] ?? "#6b7280";
+}
+
 // ─── Algorithme d'optimisation d'itinéraire (plus proche voisin) ─────────────
 
 function optimizeRoute(leads: Lead[]): Lead[] {
@@ -247,7 +252,7 @@ export default function Tournees() {
 
       const inTour   = tourIds.has(lead.id);
       const isActive = lead.id === activeLeadId;
-      const color    = markerColor(lead.status);
+      const color    = pinColor(lead);
       const isHot    = lead.priority === "haute";
 
       const pin = document.createElement("div");
@@ -257,14 +262,14 @@ export default function Tournees() {
         background:${color};
         display:flex; align-items:center; justify-content:center;
         color:white; font-weight:bold; font-size:12px;
-        border:${inTour ? "3px solid white" : isHot ? "2px solid #fbbf24" : "2px solid rgba(255,255,255,0.8)"};
+        border:${inTour ? "3px solid white" : "2px solid rgba(255,255,255,0.8)"};
         box-shadow:${isActive
           ? `0 0 0 3px ${color}55, 0 4px 14px rgba(0,0,0,0.3)`
-          : isHot ? "0 0 0 2px #fbbf2488, 0 2px 8px rgba(0,0,0,0.25)"
+          : isHot ? "0 0 0 3px #7c3aed44, 0 2px 8px rgba(0,0,0,0.25)"
           : "0 2px 6px rgba(0,0,0,0.2)"};
         cursor:pointer; transition:transform 0.15s ease; user-select:none;
       `;
-      pin.textContent = inTour ? "✓" : isHot ? "🔥" : String(index + 1);
+      pin.textContent = inTour ? "✓" : String(index + 1);
       pin.onmouseenter = () => { pin.style.transform = "scale(1.18)"; };
       pin.onmouseleave = () => { pin.style.transform = "scale(1)"; };
 
@@ -609,7 +614,7 @@ export default function Tournees() {
                   >
                     <span
                       className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
-                      style={{ backgroundColor: markerColor(l.status) }}
+                      style={{ backgroundColor: pinColor(l) }}
                     >
                       {i + 1}
                     </span>
@@ -675,9 +680,9 @@ export default function Tournees() {
                 <div className="flex items-center gap-2">
                   <span
                     className="w-6 h-6 rounded-full flex items-center justify-content:center justify-center text-white text-xs font-bold shrink-0"
-                    style={{ backgroundColor: markerColor(lead.status) }}
+                    style={{ backgroundColor: pinColor(lead) }}
                   >
-                    {tourIds.has(lead.id) ? "✓" : lead.priority === "haute" ? "🔥" : index + 1}
+                    {tourIds.has(lead.id) ? "✓" : index + 1}
                   </span>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold truncate">{lead.name}</p>

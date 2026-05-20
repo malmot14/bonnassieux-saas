@@ -1,10 +1,12 @@
-import { eq } from "drizzle-orm";
+import { eq, inArray, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import {
   InsertUser, users, leads, InsertLead, interactions, InsertInteraction,
-  diagnostics, InsertDiagnostic, appointments, InsertAppointment, Appointment,
-  prospectsPotentiels, InsertProspectPotentiel, ProspectPotentiel
+  diagnostics, InsertDiagnostic, appointments, InsertAppointment,
+  prospectsPotentiels, InsertProspectPotentiel,
+  salesScripts, InsertSalesScript,
+  messageTemplates, InsertMessageTemplate
 } from "../drizzle/schema";
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -195,6 +197,112 @@ export async function deleteProspectPotentiel(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Base non disponible");
   await db.delete(prospectsPotentiels).where(eq(prospectsPotentiels.id, id));
+  return { success: true };
+}
+
+// ─── Recent interactions (pour dashboard) ────────────────────────────────────
+
+export async function getRecentInteractionsByUser(userId: number, limit = 20) {
+  const db = await getDb();
+  if (!db) return [];
+  // Get lead IDs for this user
+  const userLeads = await db.select({ id: leads.id }).from(leads).where(eq(leads.userId, userId));
+  if (userLeads.length === 0) return [];
+  const leadIds = userLeads.map(l => l.id);
+  return db
+    .select({
+      id: interactions.id,
+      leadId: interactions.leadId,
+      type: interactions.type,
+      outcome: interactions.outcome,
+      notes: interactions.notes,
+      createdAt: interactions.createdAt,
+      leadName: leads.name,
+    })
+    .from(interactions)
+    .innerJoin(leads, eq(interactions.leadId, leads.id))
+    .where(inArray(interactions.leadId, leadIds))
+    .orderBy(desc(interactions.createdAt))
+    .limit(limit);
+}
+
+// ─── Diagnostics ──────────────────────────────────────────────────────────────
+
+export async function getDiagnosticsByLead(leadId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(diagnostics).where(eq(diagnostics.leadId, leadId));
+}
+
+export async function createDiagnostic(diag: InsertDiagnostic) {
+  const db = await getDb();
+  if (!db) throw new Error("Base non disponible");
+  const result = await db.insert(diagnostics).values(diag).returning();
+  return result[0];
+}
+
+// ─── Sales Scripts ────────────────────────────────────────────────────────────
+
+export async function getSalesScripts() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(salesScripts).orderBy(salesScripts.sector, salesScripts.title);
+}
+
+export async function getSalesScriptById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(salesScripts).where(eq(salesScripts.id, id)).limit(1);
+  return result[0];
+}
+
+export async function createSalesScript(script: InsertSalesScript) {
+  const db = await getDb();
+  if (!db) throw new Error("Base non disponible");
+  const result = await db.insert(salesScripts).values(script).returning();
+  return result[0];
+}
+
+export async function updateSalesScript(id: number, updates: Partial<InsertSalesScript>) {
+  const db = await getDb();
+  if (!db) throw new Error("Base non disponible");
+  const result = await db.update(salesScripts).set({ ...updates, updatedAt: new Date() }).where(eq(salesScripts.id, id)).returning();
+  return result[0];
+}
+
+export async function deleteSalesScript(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Base non disponible");
+  await db.delete(salesScripts).where(eq(salesScripts.id, id));
+  return { success: true };
+}
+
+// ─── Message Templates ────────────────────────────────────────────────────────
+
+export async function getMessageTemplates() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(messageTemplates).orderBy(messageTemplates.type, messageTemplates.sector);
+}
+
+export async function createMessageTemplate(template: InsertMessageTemplate) {
+  const db = await getDb();
+  if (!db) throw new Error("Base non disponible");
+  const result = await db.insert(messageTemplates).values(template).returning();
+  return result[0];
+}
+
+export async function updateMessageTemplate(id: number, updates: Partial<InsertMessageTemplate>) {
+  const db = await getDb();
+  if (!db) throw new Error("Base non disponible");
+  const result = await db.update(messageTemplates).set({ ...updates, updatedAt: new Date() }).where(eq(messageTemplates.id, id)).returning();
+  return result[0];
+}
+
+export async function deleteMessageTemplate(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Base non disponible");
+  await db.delete(messageTemplates).where(eq(messageTemplates.id, id));
   return { success: true };
 }
 

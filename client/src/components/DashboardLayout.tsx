@@ -30,7 +30,7 @@ import { Button } from "./ui/button";
 const menuItems = [
   { icon: LayoutDashboard, label: "Tableau de Bord", path: "/" },
   { icon: Users, label: "Leads", path: "/leads" },
-  { icon: Map, label: "Tournées", path: "/tours" },
+  { icon: Map, label: "Tournées", path: "/tournees" },
   { icon: BookOpen, label: "Scripts", path: "/scripts" },
   { icon: MessageSquare, label: "Outils de Com", path: "/communication-tools" },
   { icon: Target, label: "Prospects Potentiels", path: "/prospects-potentiels" },

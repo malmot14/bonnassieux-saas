@@ -25,6 +25,12 @@ const statusColors = {
   "Perdu": "bg-red-100 text-red-800",
 };
 
+const priorityStyles = {
+  haute:   { header: "from-purple-50 to-violet-50", bar: "bg-purple-600", badge: "bg-purple-100 text-purple-700", label: "Haute priorité" },
+  moyenne: { header: "from-slate-50 to-slate-100",  bar: "bg-slate-300",  badge: "bg-slate-100 text-slate-600",  label: "Priorité moyenne" },
+  basse:   { header: "from-slate-50 to-slate-100",  bar: "bg-slate-200",  badge: "bg-slate-100 text-slate-400",  label: "Priorité basse" },
+};
+
 export default function LeadCard({ lead, onUpdate }: LeadCardProps) {
   const [, setLocation] = useLocation();
   const updateMutation = trpc.leads.update.useMutation();
@@ -42,17 +48,25 @@ export default function LeadCard({ lead, onUpdate }: LeadCardProps) {
     }
   };
 
+  const pStyle = priorityStyles[lead.priority as keyof typeof priorityStyles] ?? priorityStyles.moyenne;
+
   return (
     <Card className="border-0 shadow-md hover:shadow-lg transition-shadow overflow-hidden">
-      <CardHeader className="pb-3 bg-gradient-to-r from-slate-50 to-slate-100">
+      {lead.priority === "haute" && <div className="h-1 w-full bg-purple-600" />}
+      <CardHeader className={`pb-3 bg-gradient-to-r ${pStyle.header}`}>
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <CardTitle className="text-lg text-slate-900">{lead.name}</CardTitle>
             <p className="text-xs text-slate-500 mt-1 capitalize">{lead.sector}</p>
           </div>
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColors[lead.status as keyof typeof statusColors]}`}>
-            {lead.status}
-          </span>
+          <div className="flex flex-col items-end gap-1.5">
+            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColors[lead.status as keyof typeof statusColors]}`}>
+              {lead.status}
+            </span>
+            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${pStyle.badge}`}>
+              {pStyle.label}
+            </span>
+          </div>
         </div>
       </CardHeader>
 
