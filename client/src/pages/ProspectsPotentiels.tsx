@@ -77,33 +77,32 @@ export default function ProspectsPotentiels() {
   const [miniCardProspect, setMiniCardProspect] = useState<Prospect | null>(null);
   const userMarkerRef = useRef<google.maps.marker.AdvancedMarkerElement | null>(null);
 
-  // Centrer sur la position de l'utilisateur si elle vient d'être enregistrée
+  // Géolocalisation automatique à l'ouverture
   useEffect(() => {
-    if (!mapReady || !mapRef.current) return;
-    const lat = parseFloat(localStorage.getItem("userLat") || "");
-    const lng = parseFloat(localStorage.getItem("userLng") || "");
-    if (!lat || !lng) return;
+    if (!mapReady || !mapRef.current || !navigator.geolocation) return;
 
-    // Centre la carte
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
 
-    // Supprime l'ancien marqueur utilisateur
-    if (userMarkerRef.current) userMarkerRef.current.map = null;
+        mapRef.current!.panTo({ lat, lng });
+        mapRef.current!.setZoom(14);
 
-    // Marqueur bleu "Vous êtes ici"
-    const dot = document.createElement("div");
-    dot.style.cssText = `width:16px;height:16px;border-radius:50%;background:#2563eb;border:3px solid white;box-shadow:0 0 0 3px rgba(37,99,235,0.3);`;
-    userMarkerRef.current = new google.maps.marker.AdvancedMarkerElement({
-      map: mapRef.current,
-      position: { lat, lng },
-      title: "Vous êtes ici",
-      content: dot,
-    });
+        if (userMarkerRef.current) userMarkerRef.current.map = null;
 
-    // Nettoie localStorage pour ne pas recentrer à chaque rendu
-    localStorage.removeItem("userLat");
-    localStorage.removeItem("userLng");
+        const dot = document.createElement("div");
+        dot.style.cssText = `width:16px;height:16px;border-radius:50%;background:#2563eb;border:3px solid white;box-shadow:0 0 0 3px rgba(37,99,235,0.3);`;
+        userMarkerRef.current = new google.maps.marker.AdvancedMarkerElement({
+          map: mapRef.current!,
+          position: { lat, lng },
+          title: "Vous êtes ici",
+          content: dot,
+        });
+      },
+      () => {}, // silencieux si refus
+      { enableHighAccuracy: true, timeout: 8000 }
+    );
   }, [mapReady]);
 
   // Réinitialiser l'état du panneau quand on change de prospect

@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/sidebar";
 import { getLoginUrl } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft, Users, MessageSquare, Map, BookOpen, Heart, Target, LocateFixed } from "lucide-react";
+import { LayoutDashboard, LogOut, PanelLeft, Users, MessageSquare, Map, BookOpen, Heart, Target } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
@@ -88,7 +88,6 @@ function DashboardLayoutContent({
   const { state, toggleSidebar } = useSidebar();
   const isCollapsed = state === "collapsed";
   const [isResizing, setIsResizing] = useState(false);
-  const [locating, setLocating] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
@@ -227,26 +226,6 @@ function DashboardLayoutContent({
                 {activeMenuItem?.label ?? "Menu"}
               </span>
             </div>
-            <button
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${locating ? "bg-blue-100 text-blue-600" : "bg-gray-100 text-gray-600 hover:bg-blue-50 hover:text-blue-600"}`}
-              onClick={() => {
-                if (!navigator.geolocation) return;
-                setLocating(true);
-                navigator.geolocation.getCurrentPosition(
-                  (pos) => {
-                    localStorage.setItem("userLat", String(pos.coords.latitude));
-                    localStorage.setItem("userLng", String(pos.coords.longitude));
-                    setLocating(false);
-                    setLocation("/prospects-potentiels");
-                  },
-                  () => setLocating(false),
-                  { enableHighAccuracy: true, timeout: 8000 }
-                );
-              }}
-            >
-              <LocateFixed className={`h-4 w-4 ${locating ? "animate-pulse" : ""}`} />
-              {locating ? "..." : "Me localiser"}
-            </button>
           </div>
         )}
         <main className="flex-1 overflow-auto p-6">
